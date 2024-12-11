@@ -1,0 +1,17 @@
+.shopping-category-container {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 30px;
+
+	h2 {
+		cursor: pointer;
+		font-size: 20px;
+		margin-bottom: 25px;
+	}
+
+	.shopping-category {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		column-gap: 20px;
+	}
+}
