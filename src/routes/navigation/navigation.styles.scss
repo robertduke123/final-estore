@@ -1,0 +1,29 @@
+.navigation-container{
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+    height: 10vh;    
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    background-color: white;
+
+    .logo-container{
+        width: 70px;
+        height: 100%;        
+        padding: 25px;
+    }
+
+    .navigation-links{
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        .nav-link{
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+    }
+}

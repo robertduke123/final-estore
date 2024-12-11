@@ -1,0 +1,36 @@
+.slide-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .slide-cover{
+        position: absolute;
+        z-index: 3;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(125, 86, 86);
+        opacity: 0.4;
+    }
+
+    h2{
+        cursor: pointer;
+        position: absolute;
+        z-index: 4;
+        width: 150px;
+        height: 40px;
+        font-weight: bold;
+        font-size: 22px;
+        color: white;
+        text-transform: uppercase;
+        border: 2px solid white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
