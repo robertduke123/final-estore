@@ -5,7 +5,6 @@ import ShoppingCategory from "../../components/shopping-category/shopping-catego
 
 const ShoppingCategories = () => {
 	const itemList = useSelector(selectItemList);
-	console.log(itemList);
 
 	return (
 		<div style={{ padding: "80px 30px 30px" }}>

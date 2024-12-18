@@ -3,8 +3,6 @@ import "./shopping-category.styles.scss";
 import ProductCard from "../product-card/product-card.component";
 
 const ShoppingCategory = ({ products }) => {
-	console.log(products);
-
 	return (
 		<div className="shopping-category-container">
 			<h2>{products.title}</h2>
