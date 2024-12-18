@@ -7,3 +7,13 @@ export const selectItemList = createSelector(
 	[selectItemListReducer],
 	(itemListSlice) => itemListSlice.itemList
 );
+
+export const selectItemListMap = createSelector(
+	[selectItemList],
+	(itemCategory) =>
+		itemCategory.reduce((acc, category) => {
+			const { title, items } = category;
+			acc[title.toLowerCase()] = items;
+			return acc;
+		}, {})
+);

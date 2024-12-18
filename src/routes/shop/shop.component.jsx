@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { setItemList } from "../../store/itemList/item-list.reducer";
 import SHOP_DATA from "../../shop-data";
 import ShoppingCategories from "../shopping-categories/shopping-categories.component";
+import Category from "../category/category.component";
 
 const Shop = () => {
 	const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const Shop = () => {
 	return (
 		<Routes>
 			<Route index element={<ShoppingCategories />} />
+			<Route path=":category" element={<Category />} />
 		</Routes>
 	);
 };

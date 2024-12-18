@@ -1,8 +1,10 @@
 import React from "react";
 import "./slide.styles.scss";
+import { useNavigate } from "react-router-dom";
 
 const Slide = ({ category, imageIndex }) => {
 	const { title, imageUrl, route } = category;
+	const navigate = useNavigate();
 
 	return (
 		<div
@@ -11,7 +13,9 @@ const Slide = ({ category, imageIndex }) => {
 				backgroundImage: `url(${imageUrl})`,
 				translate: `${-100 * imageIndex}%`,
 			}}>
-			<h2 className="image-slider-title">{title.toUpperCase()}</h2>
+			<h2 onClick={() => navigate(route)} className="image-slider-title">
+				{title.toUpperCase()}
+			</h2>
 			<div
 				style={{
 					width: "100%",

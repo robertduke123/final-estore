@@ -80,13 +80,13 @@ const SlideShow = () => {
 				<button
 					className="img-slider-btn"
 					onClick={showPrevImage}
-					style={{ left: "0" }}>
+					style={{ left: "0", cursor: "pointer" }}>
 					<ArrowBigLeft />
 				</button>
 				<button
 					className="img-slider-btn"
 					onClick={showNextImage}
-					style={{ right: "0" }}>
+					style={{ right: "0", cursor: "pointer" }}>
 					<ArrowBigRight />
 				</button>
 			</div>
@@ -109,6 +109,7 @@ const SlideShow = () => {
 								backgroundColor: `${
 									indx === imageIndex ? "white" : "transparent"
 								}`,
+								cursor: "pointer",
 							}}></div>
 					</button>
 				))}
