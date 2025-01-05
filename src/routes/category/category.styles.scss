@@ -1,0 +1,21 @@
+.category-container {
+	padding: 30px 30px 100px;
+
+	h3 {
+		font-size: 38px;
+		margin-bottom: 25px;
+		text-align: center;
+	}
+	h2 {
+		font-weight: 500;
+		width: 90%;
+		margin-bottom: 15px;
+	}
+
+	.category-items-container {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		column-gap: 20px;
+		row-gap: 50px;
+	}
+}
