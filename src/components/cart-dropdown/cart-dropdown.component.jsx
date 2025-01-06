@@ -12,8 +12,10 @@ const CartDropdown = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const goToCheckoutHandler = () => {
-		dispatch(setIsCartOpen());
-		navigate("/checkout");
+		if (cartItems.length > 0) {
+			dispatch(setIsCartOpen());
+			navigate("/checkout");
+		}
 	};
 
 	return (

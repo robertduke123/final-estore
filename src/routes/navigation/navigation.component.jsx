@@ -19,7 +19,10 @@ const Navigation = () => {
 					<Link to="/shop">
 						<span className="nav-link">SHOP</span>
 					</Link>
-					<span className="nav-link">SIGN IN</span>
+					<Link to="/auth">
+						<span className="nav-link">SIGN IN</span>
+					</Link>
+
 					<div className="nav-link">
 						<CartIcon />
 					</div>
