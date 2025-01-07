@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "./sign-up-form.styles.scss";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../../store/user/user.reducer";
+import { useNavigate } from "react-router-dom";
 
 const defaultFormFields = {
 	displayName: "",
@@ -11,6 +14,8 @@ const defaultFormFields = {
 };
 
 const SignUpForm = () => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const { displayName, email, password, confirmPassword } = formFields;
 
@@ -20,8 +25,24 @@ const SignUpForm = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(formFields);
-		resetFormFields();
+		if (password === confirmPassword) {
+			await fetch("http://localhost:4000/register", {
+				method: "POST",
+				headers: { "Content-Type": "application/Json" },
+				body: JSON.stringify({
+					name: displayName,
+					email: email,
+					password: password,
+				}),
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					console.log(data);
+					dispatch(setCurrentUser(data));
+					navigate("/");
+					resetFormFields();
+				});
+		}
 	};
 
 	const handleChange = (e) => {
@@ -46,7 +67,7 @@ const SignUpForm = () => {
 
 				<FormInput
 					label="Email"
-					type="email"
+					type="text"
 					required
 					onChange={handleChange}
 					name="email"
