@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./category.styles.scss";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import {
-	selectItemList,
-	selectItemListMap,
-} from "../../store/itemList/item-list.selector";
+import { selectItemList } from "../../store/itemList/item-list.selector";
 import ProductCard from "../../components/product-card/product-card.component";
 
 const Category = () => {
@@ -18,7 +15,6 @@ const Category = () => {
 
 	useEffect(() => {
 		setProducts(selectCategory[0]);
-		console.log(products);
 	}, [category, itemList]);
 
 	return (

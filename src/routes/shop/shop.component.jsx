@@ -5,6 +5,7 @@ import { setItemList } from "../../store/itemList/item-list.reducer";
 import SHOP_DATA from "../../shop-data";
 import ShoppingCategories from "../shopping-categories/shopping-categories.component";
 import Category from "../category/category.component";
+import ProductPage from "../../components/product-page/product-page.component";
 
 const Shop = () => {
 	const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const Shop = () => {
 		<Routes>
 			<Route index element={<ShoppingCategories />} />
 			<Route path=":category" element={<Category />} />
+			<Route path="product/:id" element={<ProductPage />} />
 		</Routes>
 	);
 };

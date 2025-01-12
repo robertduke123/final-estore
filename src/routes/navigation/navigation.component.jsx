@@ -33,7 +33,7 @@ const Navigation = () => {
 		<Fragment>
 			<div className="navigation-container">
 				<Link to="/">
-					<div className="logo-container">LOGO</div>
+					<div className="logo">E-COMMERCE</div>
 				</Link>
 
 				<div className="navigation-links">
