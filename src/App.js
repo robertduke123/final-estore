@@ -13,33 +13,35 @@ const App = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		const refresh = localStorage.getItem("refreshToken");
-		fetch("http://localhost:4000/token", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				token: refresh,
-			}),
-		})
-			.then((response) => {
-				if (response.status !== 403) {
-					return response.json();
-				}
+		if (localStorage.getItem("refreshToken")) {
+			const refresh = localStorage.getItem("refreshToken");
+			fetch("http://localhost:4000/token", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					token: refresh,
+				}),
 			})
-			.then((data) => {
-				if (data?.length > 15) {
-					fetch("http://localhost:4000/post", {
-						headers: {
-							Authorization: `Bearer ${data}`,
-							"Content-Type": "application/json",
-						},
-					})
-						.then((response) => response.json())
-						.then((data) => {
-							dispatch(setCurrentUser(data));
-						});
-				}
-			});
+				.then((response) => {
+					if (response.status !== 403) {
+						return response.json();
+					}
+				})
+				.then((data) => {
+					if (data?.length > 15) {
+						fetch("http://localhost:4000/post", {
+							headers: {
+								Authorization: `Bearer ${data}`,
+								"Content-Type": "application/json",
+							},
+						})
+							.then((response) => response.json())
+							.then((data) => {
+								dispatch(setCurrentUser(data));
+							});
+					}
+				});
+		}
 	}, []);
 
 	return (
