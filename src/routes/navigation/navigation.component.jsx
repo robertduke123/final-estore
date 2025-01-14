@@ -5,28 +5,26 @@ import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsCartOpen } from "../../store/cart/cart.selector";
-import { selectCurrentUser } from "../../store/user/user.selector";
-import { setCurrentUser } from "../../store/user/user.reducer";
+import {
+	selectCurrentUser,
+	selectUserDropdownOpen,
+} from "../../store/user/user.selector";
+import {
+	setCurrentUser,
+	setUserDropdownIsOpen,
+} from "../../store/user/user.reducer";
+import UserDropdown from "../../components/user-dropdown/user-dropdown.component";
+import { setIsCartOpen } from "../../store/cart/cart.reducer";
 
 const Navigation = () => {
 	const dispatch = useDispatch();
 	const currentUser = useSelector(selectCurrentUser);
+	const userDropdownOpen = useSelector(selectUserDropdownOpen);
 	const isCartOpen = useSelector(selectIsCartOpen);
 
-	const handleSignOut = async () => {
-		await fetch("http://localhost:4000/token", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				email: currentUser.email,
-			}),
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				console.log(data[0]);
-				dispatch(setCurrentUser(null));
-				localStorage.removeItem("refreshToken");
-			});
+	const handleIsUserDropdownOpen = () => {
+		dispatch(setIsCartOpen(false));
+		dispatch(setUserDropdownIsOpen(!userDropdownOpen));
 	};
 
 	return (
@@ -37,16 +35,58 @@ const Navigation = () => {
 				</Link>
 
 				<div className="navigation-links">
-					<Link to="/shop">
+					<Link
+						style={{
+							display: "flex",
+							flexDirection: "column",
+							justifyContent: "center",
+							alignItems: "center",
+						}}
+						to="/shop">
 						<span className="nav-link">SHOP</span>
+						<div className="underline"></div>
 					</Link>
 					{currentUser ? (
-						<span className="nav-link" onClick={handleSignOut}>
-							SIGN OUT
-						</span>
+						<div
+							style={{
+								display: "flex",
+								flexDirection: "column",
+								justifyContent: "center",
+								alignItems: "center",
+							}}>
+							<span
+								className="nav-link"
+								style={{
+									width: "90px",
+									display: "flex",
+									justifyContent: "space-between",
+									alignItems: "center",
+								}}
+								onClick={handleIsUserDropdownOpen}>
+								<div style={{ width: "80px", textAlign: "center" }}>
+									{currentUser.name.split(" ")[0]}
+								</div>
+								<i
+									class="fa-solid fa-angle-down"
+									style={{ marginRight: "-10px" }}></i>
+							</span>
+							<div className="underline"></div>
+						</div>
 					) : (
-						<Link to="/auth">
-							<span className="nav-link">SIGN IN</span>
+						<Link
+							style={{
+								display: "flex",
+								flexDirection: "column",
+								justifyContent: "center",
+								alignItems: "center",
+							}}
+							to="/auth">
+							<span
+								className="nav-link"
+								style={{ width: "90px", textAlign: "center" }}>
+								SIGN IN
+							</span>
+							<div className="underline"></div>
 						</Link>
 					)}
 
@@ -54,6 +94,8 @@ const Navigation = () => {
 						<CartIcon />
 					</div>
 				</div>
+
+				{userDropdownOpen && <UserDropdown />}
 				{isCartOpen && <CartDropdown />}
 			</div>
 			<Outlet />

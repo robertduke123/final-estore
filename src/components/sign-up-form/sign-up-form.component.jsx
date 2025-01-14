@@ -38,7 +38,7 @@ const SignUpForm = () => {
 				.then((res) => res.json())
 				.then((data) => {
 					console.log(data);
-					dispatch(setCurrentUser(data));
+					dispatch(setCurrentUser(data[0]));
 					navigate("/");
 					resetFormFields();
 				});

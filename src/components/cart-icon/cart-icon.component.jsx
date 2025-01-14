@@ -7,12 +7,16 @@ import {
 	selectIsCartOpen,
 } from "../../store/cart/cart.selector";
 import { setIsCartOpen } from "../../store/cart/cart.reducer";
+import { setUserDropdownIsOpen } from "../../store/user/user.reducer";
 
 const CartIcon = () => {
 	const dispatch = useDispatch();
 	const cartCount = useSelector(selectCartCount);
 	const isCartOpen = useSelector(selectIsCartOpen);
-	const handleIsCartOpen = () => dispatch(setIsCartOpen(!isCartOpen));
+	const handleIsCartOpen = () => {
+		dispatch(setUserDropdownIsOpen(false));
+		dispatch(setIsCartOpen(!isCartOpen));
+	};
 
 	return (
 		<div className="cart-icon-container" onClick={handleIsCartOpen}>

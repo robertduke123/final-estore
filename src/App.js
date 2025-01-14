@@ -37,7 +37,7 @@ const App = () => {
 						})
 							.then((response) => response.json())
 							.then((data) => {
-								dispatch(setCurrentUser(data));
+								dispatch(setCurrentUser(data[0]));
 							});
 					}
 				});
