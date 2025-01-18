@@ -6,9 +6,11 @@ import {
 	setCurrentUser,
 	setUserDropdownIsOpen,
 } from "../../store/user/user.reducer";
+import { useNavigate } from "react-router-dom";
 
 const UserDropdown = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const currentUser = useSelector(selectCurrentUser);
 
 	const handleSignOut = async () => {
@@ -29,7 +31,7 @@ const UserDropdown = () => {
 	};
 	return (
 		<div className="user-dropdown-container">
-			<div className="user-dropdown-item">
+			<div className="user-dropdown-item" onClick={() => navigate("user")}>
 				<span>USER INFO</span>
 			</div>
 			<div className="user-dropdown-item" onClick={handleSignOut}>
