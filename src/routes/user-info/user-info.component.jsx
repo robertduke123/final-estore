@@ -6,8 +6,7 @@ import Button from "../../components/button/button.component";
 const UserInfo = () => {
 	return (
 		<div className="user-info-container">
-			<h2>Don't have an account?</h2>
-			<span>Sign up with your email and password</span>
+			<h2>User Info</h2>
 			<form>
 				<FormInput
 					label="Display Name"
