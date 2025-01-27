@@ -13,6 +13,11 @@ const UserDropdown = () => {
 	const navigate = useNavigate();
 	const currentUser = useSelector(selectCurrentUser);
 
+	const handleUserNav = () => {
+		navigate("user");
+		dispatch(setUserDropdownIsOpen(false));
+	};
+
 	const handleSignOut = async () => {
 		await fetch("http://localhost:4000/token", {
 			method: "POST",
@@ -27,11 +32,12 @@ const UserDropdown = () => {
 				dispatch(setCurrentUser(null));
 				localStorage.removeItem("refreshToken");
 				dispatch(setUserDropdownIsOpen(false));
+				navigate("/");
 			});
 	};
 	return (
 		<div className="user-dropdown-container">
-			<div className="user-dropdown-item" onClick={() => navigate("user")}>
+			<div className="user-dropdown-item" onClick={handleUserNav}>
 				<span>USER INFO</span>
 			</div>
 			<div className="user-dropdown-item" onClick={handleSignOut}>

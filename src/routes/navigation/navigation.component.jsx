@@ -9,10 +9,7 @@ import {
 	selectCurrentUser,
 	selectUserDropdownOpen,
 } from "../../store/user/user.selector";
-import {
-	setCurrentUser,
-	setUserDropdownIsOpen,
-} from "../../store/user/user.reducer";
+import { setUserDropdownIsOpen } from "../../store/user/user.reducer";
 import UserDropdown from "../../components/user-dropdown/user-dropdown.component";
 import { setIsCartOpen } from "../../store/cart/cart.reducer";
 

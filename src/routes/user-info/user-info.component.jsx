@@ -10,7 +10,11 @@ const UserInfo = () => {
 	return (
 		<div className="user-info-container">
 			<h2>User Info</h2>
-			{edit ? <UserDisplay handleEdit={handleEdit} /> : <UserForm />}
+			{edit ? (
+				<UserDisplay handleEdit={handleEdit} />
+			) : (
+				<UserForm handleEdit={handleEdit} />
+			)}
 		</div>
 	);
 };
