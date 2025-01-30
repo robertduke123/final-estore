@@ -13,6 +13,7 @@ const CartDropdown = () => {
 	const dispatch = useDispatch();
 	const goToCheckoutHandler = () => {
 		if (cartItems.length > 0) {
+			window.scrollTo(0, 0);
 			dispatch(setIsCartOpen());
 			navigate("/checkout");
 		}

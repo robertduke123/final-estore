@@ -1,24 +1,37 @@
 import React, { useState } from "react";
 import "./user-form.styles.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
+import { setCurrentUser } from "../../store/user/user.reducer";
 
 const UserForm = ({ handleEdit }) => {
+	const dispatch = useDispatch();
 	const currentUser = useSelector(selectCurrentUser);
 	const [displayInfo, setDisplayInfo] = useState({
 		displayName: currentUser ? currentUser.name : "",
 		email: currentUser ? currentUser.email : "",
-		phone: "",
-		address: "",
+		phone: currentUser ? currentUser.phone : "",
+		address: currentUser ? currentUser.address : "",
 	});
-	console.log(displayInfo);
 
 	const { displayName, email, phone, address } = displayInfo;
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setDisplayInfo({ ...displayInfo, [name]: value });
+	};
+
+	const handleSetChanges = (e) => {
+		e.preventDefault();
+		const newInfo = {
+			id: currentUser.id,
+			name: displayName,
+			email: email,
+			phone: phone,
+			address: address,
+		};
+		dispatch(setCurrentUser(newInfo));
 	};
 
 	return (
@@ -53,8 +66,7 @@ const UserForm = ({ handleEdit }) => {
 					<div className="inputs">
 						<FormInput
 							label="Phone"
-							type="text"
-							required
+							type="number"
 							onChange={handleChange}
 							name="phone"
 							value={phone}
@@ -62,7 +74,6 @@ const UserForm = ({ handleEdit }) => {
 						<FormInput
 							label="Address"
 							type="text"
-							required
 							onChange={handleChange}
 							name="address"
 							value={address}
@@ -79,7 +90,12 @@ const UserForm = ({ handleEdit }) => {
 					<Button type="text" buttonType="inverted" onClick={handleEdit}>
 						Back
 					</Button>
-					<Button type="submit">Edit</Button>
+					<Button
+						type="submit"
+						buttonType="inverted"
+						onClick={handleSetChanges}>
+						Edit
+					</Button>
 				</div>
 			</form>
 		</div>

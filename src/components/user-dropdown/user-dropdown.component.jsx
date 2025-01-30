@@ -14,6 +14,7 @@ const UserDropdown = () => {
 	const currentUser = useSelector(selectCurrentUser);
 
 	const handleUserNav = () => {
+		window.scrollTo(0, 0);
 		navigate("user");
 		dispatch(setUserDropdownIsOpen(false));
 	};
@@ -28,7 +29,7 @@ const UserDropdown = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data[0]);
+				window.scrollTo(0, 0);
 				dispatch(setCurrentUser(null));
 				localStorage.removeItem("refreshToken");
 				dispatch(setUserDropdownIsOpen(false));

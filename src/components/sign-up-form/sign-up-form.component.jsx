@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 const defaultFormFields = {
 	displayName: "",
 	email: "",
+	phone: "",
+	address: "",
 	password: "",
 	confirmPassword: "",
 };
@@ -17,7 +19,8 @@ const SignUpForm = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [formFields, setFormFields] = useState(defaultFormFields);
-	const { displayName, email, password, confirmPassword } = formFields;
+	const { displayName, email, phone, address, password, confirmPassword } =
+		formFields;
 
 	const resetFormFields = () => {
 		setFormFields(defaultFormFields);
@@ -32,13 +35,15 @@ const SignUpForm = () => {
 				body: JSON.stringify({
 					name: displayName,
 					email: email,
+					phone: phone,
+					address: address,
 					password: password,
 				}),
 			})
 				.then((res) => res.json())
 				.then((data) => {
 					console.log(data);
-					dispatch(setCurrentUser(data[0]));
+					dispatch(setCurrentUser(data));
 					navigate("/");
 					resetFormFields();
 				});
@@ -67,7 +72,7 @@ const SignUpForm = () => {
 
 				<FormInput
 					label="Email"
-					type="text"
+					type="email"
 					required
 					onChange={handleChange}
 					name="email"
@@ -90,6 +95,21 @@ const SignUpForm = () => {
 					onChange={handleChange}
 					name="confirmPassword"
 					value={confirmPassword}
+				/>
+				<FormInput
+					label="Phone"
+					type="number"
+					onChange={handleChange}
+					name="phone"
+					value={phone}
+				/>
+
+				<FormInput
+					label="Address"
+					type="text"
+					onChange={handleChange}
+					name="address"
+					value={address}
 				/>
 				<Button type="submit">Sign Up</Button>
 			</form>

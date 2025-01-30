@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./navigation.styles.scss";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
@@ -15,6 +15,7 @@ import { setIsCartOpen } from "../../store/cart/cart.reducer";
 
 const Navigation = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const currentUser = useSelector(selectCurrentUser);
 	const userDropdownOpen = useSelector(selectUserDropdownOpen);
 	const isCartOpen = useSelector(selectIsCartOpen);
@@ -22,6 +23,11 @@ const Navigation = () => {
 	const handleIsUserDropdownOpen = () => {
 		dispatch(setIsCartOpen(false));
 		dispatch(setUserDropdownIsOpen(!userDropdownOpen));
+	};
+
+	const handleSignIn = () => {
+		window.scrollTo(0, 0);
+		navigate("auth");
 	};
 
 	return (
@@ -61,7 +67,7 @@ const Navigation = () => {
 								}}
 								onClick={handleIsUserDropdownOpen}>
 								<div style={{ width: "80px", textAlign: "center" }}>
-									{currentUser.name.split(" ")[0]}
+									{currentUser?.name.split(" ")[0]}
 								</div>
 								<i
 									class="fa-solid fa-angle-down"
@@ -70,21 +76,21 @@ const Navigation = () => {
 							<div className="underline"></div>
 						</div>
 					) : (
-						<Link
+						<div
 							style={{
 								display: "flex",
 								flexDirection: "column",
 								justifyContent: "center",
 								alignItems: "center",
 							}}
-							to="/auth">
+							onClick={handleSignIn}>
 							<span
 								className="nav-link"
 								style={{ width: "90px", textAlign: "center" }}>
 								SIGN IN
 							</span>
 							<div className="underline"></div>
-						</Link>
+						</div>
 					)}
 
 					<div className="nav-link">

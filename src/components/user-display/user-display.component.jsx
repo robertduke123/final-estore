@@ -17,6 +17,10 @@ const UserDisplay = ({ handleEdit }) => {
 				<span>{currentUser ? currentUser.email : ""}</span>
 			</div>
 			<div className="user-display">
+				<h3>Phone: </h3>
+				<span>{currentUser ? currentUser.phone : ""}</span>
+			</div>
+			<div className="user-display">
 				<h3>Address: </h3>
 				<span>{currentUser ? currentUser?.address : ""}</span>
 			</div>
