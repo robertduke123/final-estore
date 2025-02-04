@@ -70,7 +70,7 @@ const Navigation = () => {
 									{currentUser?.name.split(" ")[0]}
 								</div>
 								<i
-									class="fa-solid fa-angle-down"
+									className="fa-solid fa-angle-down"
 									style={{ marginRight: "-10px" }}></i>
 							</span>
 							<div className="underline"></div>

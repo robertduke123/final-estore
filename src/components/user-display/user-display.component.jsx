@@ -24,9 +24,17 @@ const UserDisplay = ({ handleEdit }) => {
 				<h3>Address: </h3>
 				<span>{currentUser ? currentUser?.address : ""}</span>
 			</div>
-			<span className="user-display-edit" onClick={handleEdit}>
-				Edit Profile
-			</span>
+			<div style={{ display: "flex" }}>
+				<span className="user-display-edit" onClick={() => handleEdit("form")}>
+					Edit Profile
+				</span>
+				<span
+					style={{ marginLeft: "50px" }}
+					className="user-display-edit"
+					onClick={() => handleEdit("password")}>
+					Edit Password
+				</span>
+			</div>
 		</div>
 	);
 };

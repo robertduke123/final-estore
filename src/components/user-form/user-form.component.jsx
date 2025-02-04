@@ -11,27 +11,36 @@ const UserForm = ({ handleEdit }) => {
 	const currentUser = useSelector(selectCurrentUser);
 	const [displayInfo, setDisplayInfo] = useState({
 		displayName: currentUser ? currentUser.name : "",
-		email: currentUser ? currentUser.email : "",
+		prevEmail: currentUser ? currentUser.email : "",
+		newEmail: currentUser ? currentUser.email : "",
 		phone: currentUser ? currentUser.phone : "",
 		address: currentUser ? currentUser.address : "",
 	});
 
-	const { displayName, email, phone, address } = displayInfo;
+	const { displayName, prevEmail, newEmail, phone, address } = displayInfo;
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setDisplayInfo({ ...displayInfo, [name]: value });
 	};
 
-	const handleSetChanges = (e) => {
+	const handleSetChanges = async (e) => {
 		e.preventDefault();
-		const newInfo = {
-			id: currentUser.id,
-			name: displayName,
-			email: email,
-			phone: phone,
-			address: address,
-		};
-		dispatch(setCurrentUser(newInfo));
+		await fetch("http://localhost:4000/edit", {
+			method: "POST",
+			headers: { "Content-Type": "application/Json" },
+			body: JSON.stringify({
+				name: displayName,
+				prevEmail: prevEmail,
+				newEmail: newEmail,
+				phone: phone,
+				address: address,
+			}),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				dispatch(setCurrentUser(data[0]));
+				handleEdit("display");
+			});
 	};
 
 	return (
@@ -59,8 +68,8 @@ const UserForm = ({ handleEdit }) => {
 							type="text"
 							required
 							onChange={handleChange}
-							name="email"
-							value={email}
+							name="newEmail"
+							value={newEmail}
 						/>
 					</div>
 					<div className="inputs">
@@ -87,7 +96,10 @@ const UserForm = ({ handleEdit }) => {
 						display: "flex",
 						justifyContent: "space-between",
 					}}>
-					<Button type="text" buttonType="inverted" onClick={handleEdit}>
+					<Button
+						type="text"
+						buttonType="inverted"
+						onClick={() => handleEdit("display")}>
 						Back
 					</Button>
 					<Button
