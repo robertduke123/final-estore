@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./routes/home/home.component";
 import Navigation from "./routes/navigation/navigation.component";
@@ -10,10 +10,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./store/user/user.reducer";
 import UserInfo from "./routes/user-info/user-info.component";
 import { selectCurrentUser } from "./store/user/user.selector";
+import Message from "./components/message/message.component";
+import { selectMessageDisplay } from "./store/message/message.selector";
 
 const App = () => {
 	const dispatch = useDispatch();
 	const currentUser = useSelector(selectCurrentUser);
+	const messageDisplay = useSelector(selectMessageDisplay);
 
 	useEffect(() => {
 		if (localStorage.getItem("refreshToken")) {
@@ -48,20 +51,23 @@ const App = () => {
 	}, []);
 
 	return (
-		<Routes>
-			<Route path="/" element={<Navigation />}>
-				<Route path="/" element={<Footer />}>
-					<Route index element={<Home />} />
-					<Route path="shop/*" element={<Shop />} />
-					<Route path="checkout" element={<Checkout />} />
-					<Route path="auth" element={<Authentication />} />
-					<Route
-						path="user"
-						element={currentUser ? <UserInfo /> : <Authentication />}
-					/>
+		<Fragment>
+			{messageDisplay && <Message />}
+			<Routes>
+				<Route path="/" element={<Navigation />}>
+					<Route path="/" element={<Footer />}>
+						<Route index element={<Home />} />
+						<Route path="shop/*" element={<Shop />} />
+						<Route path="checkout" element={<Checkout />} />
+						<Route path="auth" element={<Authentication />} />
+						<Route
+							path="user"
+							element={currentUser ? <UserInfo /> : <Authentication />}
+						/>
+					</Route>
 				</Route>
-			</Route>
-		</Routes>
+			</Routes>
+		</Fragment>
 	);
 };
 

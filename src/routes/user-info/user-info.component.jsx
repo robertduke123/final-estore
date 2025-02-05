@@ -16,7 +16,7 @@ const UserInfo = () => {
 			) : edit === "form" ? (
 				<UserForm handleEdit={handleEdit} />
 			) : (
-				<PasswordForm />
+				<PasswordForm handleEdit={handleEdit} />
 			)}
 		</div>
 	);

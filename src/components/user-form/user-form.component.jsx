@@ -5,6 +5,10 @@ import { selectCurrentUser } from "../../store/user/user.selector";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 import { setCurrentUser } from "../../store/user/user.reducer";
+import {
+	setMessage,
+	setMessageDisplay,
+} from "../../store/message/message.reducer";
 
 const UserForm = ({ handleEdit }) => {
 	const dispatch = useDispatch();
@@ -39,13 +43,15 @@ const UserForm = ({ handleEdit }) => {
 			.then((res) => res.json())
 			.then((data) => {
 				dispatch(setCurrentUser(data[0]));
+				dispatch(setMessageDisplay(true));
+				dispatch(setMessage("User Info Changed"));
 				handleEdit("display");
 			});
 	};
 
 	return (
 		<div className="user-form-container">
-			<form>
+			<form onSubmit={handleSetChanges}>
 				<div
 					style={{
 						width: "75%",
@@ -102,10 +108,7 @@ const UserForm = ({ handleEdit }) => {
 						onClick={() => handleEdit("display")}>
 						Back
 					</Button>
-					<Button
-						type="submit"
-						buttonType="inverted"
-						onClick={handleSetChanges}>
+					<Button type="submit" buttonType="inverted">
 						Edit
 					</Button>
 				</div>
