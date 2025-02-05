@@ -44,7 +44,7 @@ const UserForm = ({ handleEdit }) => {
 			.then((data) => {
 				dispatch(setCurrentUser(data[0]));
 				dispatch(setMessageDisplay(true));
-				dispatch(setMessage("User Info Changed"));
+				dispatch(setMessage("User info changed"));
 				handleEdit("display");
 			});
 	};
