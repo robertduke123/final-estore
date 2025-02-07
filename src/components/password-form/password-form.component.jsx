@@ -45,7 +45,6 @@ const PasswordForm = ({ handleEdit }) => {
 					dispatch(setMessage(res.json()));
 				} else {
 					res.json().then((data) => {
-						console.log("test");
 						dispatch(setMessageDisplay(true));
 						dispatch(setMessage(data));
 						handleEdit("display");

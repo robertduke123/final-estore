@@ -6,12 +6,14 @@ import Shop from "./routes/shop/shop.component";
 import Footer from "./routes/footer/footer.component";
 import Checkout from "./routes/checkout/checkout.component";
 import Authentication from "./routes/authentication/authentication.component";
+import SHOP_DATA from "./shop-data";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./store/user/user.reducer";
 import UserInfo from "./routes/user-info/user-info.component";
 import { selectCurrentUser } from "./store/user/user.selector";
 import Message from "./components/message/message.component";
 import { selectMessageDisplay } from "./store/message/message.selector";
+import { setItemList } from "./store/itemList/item-list.reducer";
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -19,6 +21,7 @@ const App = () => {
 	const messageDisplay = useSelector(selectMessageDisplay);
 
 	useEffect(() => {
+		dispatch(setItemList(SHOP_DATA));
 		if (localStorage.getItem("refreshToken")) {
 			const refresh = localStorage.getItem("refreshToken");
 			fetch("http://localhost:4000/token", {

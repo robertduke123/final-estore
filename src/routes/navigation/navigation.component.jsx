@@ -12,6 +12,7 @@ import {
 import { setUserDropdownIsOpen } from "../../store/user/user.reducer";
 import UserDropdown from "../../components/user-dropdown/user-dropdown.component";
 import { setIsCartOpen } from "../../store/cart/cart.reducer";
+import Search from "../../components/search/search.component";
 
 const Navigation = () => {
 	const dispatch = useDispatch();
@@ -36,6 +37,8 @@ const Navigation = () => {
 				<Link to="/">
 					<div className="logo">E-COMMERCE</div>
 				</Link>
+
+				<Search />
 
 				<div className="navigation-links">
 					<Link
