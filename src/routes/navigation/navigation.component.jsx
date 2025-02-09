@@ -38,72 +38,80 @@ const Navigation = () => {
 					<div className="logo">E-COMMERCE</div>
 				</Link>
 
-				<Search />
-
-				<div className="navigation-links">
-					<Link
-						style={{
-							display: "flex",
-							flexDirection: "column",
-							justifyContent: "center",
-							alignItems: "center",
-						}}
-						to="/shop">
-						<span className="nav-link">SHOP</span>
-						<div className="underline"></div>
-					</Link>
-					{currentUser ? (
-						<div
-							style={{
-								display: "flex",
-								flexDirection: "column",
-								justifyContent: "center",
-								alignItems: "center",
-							}}>
-							<span
-								className="nav-link"
-								style={{
-									width: "90px",
-									display: "flex",
-									justifyContent: "space-between",
-									alignItems: "center",
-								}}
-								onClick={handleIsUserDropdownOpen}>
-								<div style={{ width: "80px", textAlign: "center" }}>
-									{currentUser?.name.split(" ")[0]}
-								</div>
-								<i
-									className="fa-solid fa-angle-down"
-									style={{ marginRight: "-10px" }}></i>
-							</span>
-							<div className="underline"></div>
-						</div>
-					) : (
-						<div
+				<div
+					style={{
+						width: "60%",
+						display: "flex",
+						justifyContent: "space-between",
+						alignItems: "center",
+					}}>
+					<Search />
+					<div className="navigation-links">
+						<Link
 							style={{
 								display: "flex",
 								flexDirection: "column",
 								justifyContent: "center",
 								alignItems: "center",
 							}}
-							onClick={handleSignIn}>
-							<span
-								className="nav-link"
-								style={{ width: "90px", textAlign: "center" }}>
-								SIGN IN
-							</span>
+							to="/shop">
+							<span className="nav-link">SHOP</span>
 							<div className="underline"></div>
+						</Link>
+						{currentUser ? (
+							<div
+								style={{
+									display: "flex",
+									flexDirection: "column",
+									justifyContent: "center",
+									alignItems: "center",
+								}}>
+								<span
+									className="nav-link"
+									style={{
+										width: "90px",
+										display: "flex",
+										justifyContent: "space-between",
+										alignItems: "center",
+									}}
+									onClick={handleIsUserDropdownOpen}>
+									<div style={{ width: "80px", textAlign: "center" }}>
+										{currentUser?.name.split(" ")[0]}
+									</div>
+									<i
+										className="fa-solid fa-angle-down"
+										style={{ marginRight: "-10px" }}></i>
+								</span>
+								<div className="underline"></div>
+							</div>
+						) : (
+							<div
+								style={{
+									display: "flex",
+									flexDirection: "column",
+									justifyContent: "center",
+									alignItems: "center",
+								}}
+								onClick={handleSignIn}>
+								<span
+									className="nav-link"
+									style={{ width: "90px", textAlign: "center" }}>
+									SIGN IN
+								</span>
+								<div className="underline"></div>
+							</div>
+						)}
+
+						<div className="nav-link">
+							<CartIcon />
 						</div>
-					)}
-
-					<div className="nav-link">
-						<CartIcon />
 					</div>
-				</div>
 
-				{userDropdownOpen && <UserDropdown />}
-				{isCartOpen && <CartDropdown />}
+					{userDropdownOpen && <UserDropdown />}
+					{isCartOpen && <CartDropdown />}
+				</div>
 			</div>
+
 			<Outlet />
 		</Fragment>
 	);

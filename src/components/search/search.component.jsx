@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./search.styles.scss";
 import { useSelector } from "react-redux";
 import { selectItemList } from "../../store/itemList/item-list.selector";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
+	const navigate = useNavigate();
 	const [revisedItemList, setRevisedItemList] = useState([]);
 	const [filteredList, setFilteredList] = useState([]);
-	const [listDispaly, setListDisplay] = useState(true);
+	const [listDisplay, setListDisplay] = useState(true);
 	const [search, setSearch] = useState("");
 	const itemList = useSelector(selectItemList);
 	useEffect(() => {
@@ -17,16 +19,19 @@ const Search = () => {
 		setRevisedItemList(revisedList);
 	}, []);
 
-	const handleSearch = (e) => {
-		console.log(itemList);
-
-		console.log(revisedItemList);
-
-		setSearch(e.target.value);
-		setListDisplay(search.length <= 0 ? false : true);
+	useEffect(() => {
+		search ? setListDisplay(true) : setListDisplay(false);
 		const filter = revisedItemList.filter((item) => item.name.includes(search));
 		setFilteredList([...filter]);
-		console.log(filteredList);
+		console.log(revisedItemList, filteredList);
+	}, [search]);
+
+	const handleSearch = (e) => setSearch(e.target.value);
+	const handleNavigate = async (id) => {
+		await navigate(`/shop`);
+		setSearch("");
+		setListDisplay(false);
+		navigate(`/shop/product/${id}`);
 	};
 
 	return (
@@ -36,11 +41,17 @@ const Search = () => {
 				className="search"
 				placeholder="Search..."
 				onChange={handleSearch}
+				value={search}
 			/>
-			{listDispaly && (
+			{listDisplay && (
 				<div className="list-items-container">
 					{filteredList.map((item) => (
-						<div className="list-item">{item.name}</div>
+						<div className="list-item" onClick={() => handleNavigate(item.id)}>
+							<div
+								className="list-img"
+								style={{ backgroundImage: `url(${item.imageUrl})` }}></div>
+							<span>{item.name}</span>
+						</div>
 					))}
 				</div>
 			)}

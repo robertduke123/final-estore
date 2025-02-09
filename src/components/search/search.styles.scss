@@ -1,8 +1,9 @@
 .search {
+	justify-self: flex-end;
 	position: relative;
 	z-index: 5;
 	padding: 0 10px;
-	width: 250px;
+	width: 280px;
 	height: 30px;
 	outline: none;
 	text-decoration: none;
@@ -15,15 +16,35 @@
 	z-index: 4;
 	margin-top: -20px;
 	padding-top: 20px;
-	width: 250px;
+	width: 280px;
 	height: auto;
-	max-height: 250px;
+	max-height: 260px;
 	background-color: rgb(240, 240, 240);
-	border-radius: 0 0 5px 5px;
+	border-radius: 0 0 8px 8px;
 	overflow-y: scroll;
 
 	.list-item {
+		cursor: pointer;
+		padding: 0 15px;
 		width: 100%;
-		height: 50px;
+		height: 80px;
+		font-size: 14px;
+		display: flex;
+		align-items: center;
+		transition: 0.2s ease-in-out;
+
+		span {
+			margin-left: 30px;
+		}
+
+		.list-img {
+			width: 55px;
+			height: 70px;
+			background-size: cover;
+		}
+
+		&:hover {
+			background-color: rgb(218, 218, 218);
+		}
 	}
 }

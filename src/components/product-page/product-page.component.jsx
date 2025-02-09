@@ -19,7 +19,7 @@ const ProductPage = () => {
 				item.id === Number(id) && setProduct(item);
 			});
 		});
-	}, [, itemList]);
+	}, [, itemList, id]);
 
 	const handleAddToCart = () => {
 		for (let i = 0; i < quantity; i++) {
