@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./navigation.styles.scss";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
@@ -13,6 +13,8 @@ import { setUserDropdownIsOpen } from "../../store/user/user.reducer";
 import UserDropdown from "../../components/user-dropdown/user-dropdown.component";
 import { setIsCartOpen } from "../../store/cart/cart.reducer";
 import Search from "../../components/search/search.component";
+import useWindowWidth from "../../hooks/window-hook";
+import NavSlide from "../../components/nav-slide/nav-slide.component";
 
 const Navigation = () => {
 	const dispatch = useDispatch();
@@ -20,6 +22,7 @@ const Navigation = () => {
 	const currentUser = useSelector(selectCurrentUser);
 	const userDropdownOpen = useSelector(selectUserDropdownOpen);
 	const isCartOpen = useSelector(selectIsCartOpen);
+	const width = useWindowWidth();
 
 	const handleIsUserDropdownOpen = () => {
 		dispatch(setIsCartOpen(false));
@@ -46,7 +49,8 @@ const Navigation = () => {
 						alignItems: "center",
 					}}>
 					<Search />
-					<div className="navigation-links">
+
+					{/* <div className="navigation-links">
 						<Link
 							style={{
 								display: "flex",
@@ -105,8 +109,8 @@ const Navigation = () => {
 						<div className="nav-link">
 							<CartIcon />
 						</div>
-					</div>
-
+					</div> */}
+					<NavSlide />
 					{userDropdownOpen && <UserDropdown />}
 					{isCartOpen && <CartDropdown />}
 				</div>

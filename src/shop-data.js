@@ -160,21 +160,33 @@ const SHOP_DATA = [
 				id: 19,
 				name: "Blue Jean Jacket",
 				imageUrl: "https://i.ibb.co/mJS6vz0/blue-jean-jacket.png",
+				price: 265,
+				description:
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis nostrum quidem deserunt dolores eaque provident officia! Dolor quam, praesentium doloribus deleniti hic ducimus reprehenderit ullam ab.",
 			},
 			{
 				id: 20,
 				name: "Grey Jean Jacket",
 				imageUrl: "https://i.ibb.co/N71k1ML/grey-jean-jacket.png",
+				price: 359,
+				description:
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis nostrum quidem deserunt dolores eaque provident officia! Dolor quam, praesentium doloribus deleniti hic ducimus reprehenderit ullam ab.",
 			},
 			{
 				id: 21,
 				name: "Brown Shearling",
 				imageUrl: "https://i.ibb.co/s96FpdP/brown-shearling.png",
+				price: 100,
+				description:
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis nostrum quidem deserunt dolores eaque provident officia! Dolor quam, praesentium doloribus deleniti hic ducimus reprehenderit ullam ab.",
 			},
 			{
 				id: 22,
 				name: "Tan Trench",
 				imageUrl: "https://i.ibb.co/M6hHc3F/brown-trench.png",
+				price: 325,
+				description:
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis nostrum quidem deserunt dolores eaque provident officia! Dolor quam, praesentium doloribus deleniti hic ducimus reprehenderit ullam ab.",
 			},
 		],
 	},
@@ -185,36 +197,57 @@ const SHOP_DATA = [
 				id: 23,
 				name: "Blue Tanktop",
 				imageUrl: "https://i.ibb.co/7CQVJNm/blue-tank.png",
+				price: 55,
+				description:
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis nostrum quidem deserunt dolores eaque provident officia! Dolor quam, praesentium doloribus deleniti hic ducimus reprehenderit ullam ab.",
 			},
 			{
 				id: 24,
 				name: "Floral Blouse",
 				imageUrl: "https://i.ibb.co/4W2DGKm/floral-blouse.png",
+				price: 80,
+				description:
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis nostrum quidem deserunt dolores eaque provident officia! Dolor quam, praesentium doloribus deleniti hic ducimus reprehenderit ullam ab.",
 			},
 			{
 				id: 25,
 				name: "Floral Dress",
 				imageUrl: "https://i.ibb.co/KV18Ysr/floral-skirt.png",
+				price: 65,
+				description:
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis nostrum quidem deserunt dolores eaque provident officia! Dolor quam, praesentium doloribus deleniti hic ducimus reprehenderit ullam ab.",
 			},
 			{
 				id: 26,
 				name: "Red Dots Dress",
 				imageUrl: "https://i.ibb.co/N3BN1bh/red-polka-dot-dress.png",
+				price: 99,
+				description:
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis nostrum quidem deserunt dolores eaque provident officia! Dolor quam, praesentium doloribus deleniti hic ducimus reprehenderit ullam ab.",
 			},
 			{
 				id: 27,
 				name: "Striped Sweater",
 				imageUrl: "https://i.ibb.co/KmSkMbH/striped-sweater.png",
+				price: 60,
+				description:
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis nostrum quidem deserunt dolores eaque provident officia! Dolor quam, praesentium doloribus deleniti hic ducimus reprehenderit ullam ab.",
 			},
 			{
 				id: 28,
 				name: "Yellow Track Suit",
 				imageUrl: "https://i.ibb.co/v1cvwNf/yellow-track-suit.png",
+				price: 55,
+				description:
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis nostrum quidem deserunt dolores eaque provident officia! Dolor quam, praesentium doloribus deleniti hic ducimus reprehenderit ullam ab.",
 			},
 			{
 				id: 29,
 				name: "White Blouse",
 				imageUrl: "https://i.ibb.co/qBcrsJg/white-vest.png",
+				price: 35,
+				description:
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis nostrum quidem deserunt dolores eaque provident officia! Dolor quam, praesentium doloribus deleniti hic ducimus reprehenderit ullam ab.",
 			},
 		],
 	},
@@ -225,31 +258,49 @@ const SHOP_DATA = [
 				id: 30,
 				name: "Camo Down Vest",
 				imageUrl: "https://i.ibb.co/xJS0T3Y/camo-vest.png",
+				price: 55,
+				description:
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis nostrum quidem deserunt dolores eaque provident officia! Dolor quam, praesentium doloribus deleniti hic ducimus reprehenderit ullam ab.",
 			},
 			{
 				id: 31,
 				name: "Floral T-shirt",
 				imageUrl: "https://i.ibb.co/qMQ75QZ/floral-shirt.png",
+				price: 65,
+				description:
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis nostrum quidem deserunt dolores eaque provident officia! Dolor quam, praesentium doloribus deleniti hic ducimus reprehenderit ullam ab.",
 			},
 			{
 				id: 32,
 				name: "Black & White Longsleeve",
 				imageUrl: "https://i.ibb.co/55z32tw/long-sleeve.png",
+				price: 35,
+				description:
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis nostrum quidem deserunt dolores eaque provident officia! Dolor quam, praesentium doloribus deleniti hic ducimus reprehenderit ullam ab.",
 			},
 			{
 				id: 33,
 				name: "Pink T-shirt",
 				imageUrl: "https://i.ibb.co/RvwnBL8/pink-shirt.png",
+				price: 35,
+				description:
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis nostrum quidem deserunt dolores eaque provident officia! Dolor quam, praesentium doloribus deleniti hic ducimus reprehenderit ullam ab.",
 			},
 			{
 				id: 34,
 				name: "Jean Long Sleeve",
 				imageUrl: "https://i.ibb.co/VpW4x5t/roll-up-jean-shirt.png",
+				price: 55,
+				description:
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis nostrum quidem deserunt dolores eaque provident officia! Dolor quam, praesentium doloribus deleniti hic ducimus reprehenderit ullam ab.",
 			},
 			{
 				id: 35,
 				name: "Burgundy T-shirt",
 				imageUrl: "https://i.ibb.co/mh3VM1f/polka-dot-shirt.png",
+				price: 75,
+				description:
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis nostrum quidem deserunt dolores eaque provident officia! Dolor quam, praesentium doloribus deleniti hic ducimus reprehenderit ullam ab.",
 			},
 		],
 	},

@@ -11,19 +11,19 @@ const Search = () => {
 	const [listDisplay, setListDisplay] = useState(true);
 	const [search, setSearch] = useState("");
 	const itemList = useSelector(selectItemList);
+
 	useEffect(() => {
 		const revisedList = [];
 		itemList.forEach((arr) =>
 			arr.items.forEach((item) => revisedList.push(item))
 		);
 		setRevisedItemList(revisedList);
-	}, []);
+	}, [, itemList]);
 
 	useEffect(() => {
 		search ? setListDisplay(true) : setListDisplay(false);
 		const filter = revisedItemList.filter((item) => item.name.includes(search));
 		setFilteredList([...filter]);
-		console.log(revisedItemList, filteredList);
 	}, [search]);
 
 	const handleSearch = (e) => setSearch(e.target.value);
