@@ -3,11 +3,9 @@ import "./nav-slide.styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { selectSlideIsOpen } from "../../store/slide/slide.selector";
 import { setSlideOpen } from "../../store/slide/slide.reducer";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import {
-	selectCartCount,
-	selectCartTotal,
-} from "../../store/cart/cart.selector";
+import { setCurrentUser } from "../../store/user/user.reducer";
+import { useNavigate } from "react-router-dom";
+import { selectCartCount } from "../../store/cart/cart.selector";
 import { selectCurrentUser } from "../../store/user/user.selector";
 
 const NavSlide = () => {
@@ -24,7 +22,27 @@ const NavSlide = () => {
 
 	const handleNav = (url) => {
 		navigate(url);
+		setUserOpen(false);
 		dispatch(setSlideOpen(false));
+	};
+
+	const handleSignOut = async () => {
+		await fetch("http://localhost:4000/token", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				email: currentUser.email,
+			}),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				window.scrollTo(0, 0);
+				setUserOpen(false);
+				dispatch(setCurrentUser(null));
+				localStorage.removeItem("refreshToken");
+				dispatch(setSlideOpen(false));
+				navigate("/");
+			});
 	};
 
 	return (
@@ -41,10 +59,12 @@ const NavSlide = () => {
 				/>
 
 				<ul>
-					<li onClick={() => handleNav("/shop")}>SHOP</li>
+					<li className="top-link" onClick={() => handleNav("/shop")}>
+						SHOP
+					</li>
 					{currentUser ? (
 						<div>
-							<li onClick={handleUserOpen}>
+							<li className="top-link" onClick={handleUserOpen}>
 								{currentUser?.name.split(" ")[0].toUpperCase()}
 								{!userOpen ? (
 									<i
@@ -58,28 +78,48 @@ const NavSlide = () => {
 									/>
 								)}
 							</li>
-							{userOpen && (
-								<div className="user-links">
-									<li>USER INFO</li>
-									<li>SIGN OUT</li>
-								</div>
-							)}
+							<div
+								style={
+									userOpen
+										? { transform: "translateY(0)" }
+										: { transform: "translateY(-66.5%)" }
+								}
+								className="user-links-container">
+								<li className="user-links" onClick={() => handleNav("user")}>
+									USER INFO
+								</li>
+								<li className="user-links" onClick={handleSignOut}>
+									SIGN OUT
+								</li>
+								<li
+									onClick={() => {
+										cartTotal > 0 && handleNav("/checkout");
+									}}>
+									<span>CHECKOUT</span>
+									<div
+										className="total"
+										style={cartTotal > 0 ? { opacity: "1" } : { opacity: "0" }}>
+										{cartTotal}
+									</div>
+								</li>
+							</div>
 						</div>
 					) : (
-						<li onClick={() => handleNav("/auth")}>SIGN IN</li>
-					)}
-
-					<li
-						onClick={() => {
-							cartTotal > 0 && handleNav("/checkout");
-						}}>
-						<span>CHECKOUT</span>
-						<div
-							className="total"
-							style={cartTotal > 0 ? { opacity: "1" } : { opacity: "0" }}>
-							{cartTotal}
+						<div>
+							<li onClick={() => handleNav("/auth")}>SIGN IN</li>
+							<li
+								onClick={() => {
+									cartTotal > 0 && handleNav("/checkout");
+								}}>
+								<span>CHECKOUT</span>
+								<div
+									className="total"
+									style={cartTotal > 0 ? { opacity: "1" } : { opacity: "0" }}>
+									{cartTotal}
+								</div>
+							</li>
 						</div>
-					</li>
+					)}
 				</ul>
 			</div>
 
