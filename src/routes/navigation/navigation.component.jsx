@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./navigation.styles.scss";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
@@ -23,6 +23,7 @@ const Navigation = () => {
 	const userDropdownOpen = useSelector(selectUserDropdownOpen);
 	const isCartOpen = useSelector(selectIsCartOpen);
 	const width = useWindowWidth();
+	const [openSearch, setOpenSearch] = useState(false);
 
 	const handleIsUserDropdownOpen = () => {
 		dispatch(setIsCartOpen(false));
@@ -33,8 +34,6 @@ const Navigation = () => {
 		window.scrollTo(0, 0);
 		navigate("auth");
 	};
-
-	console.log(width);
 
 	return (
 		<Fragment>
@@ -52,10 +51,16 @@ const Navigation = () => {
 					}}>
 					{width >= 620 ? (
 						<Search />
+					) : openSearch ? (
+						<div className="mobile-search">
+							<Search />
+							<i class="fa-solid fa-x" onClick={() => setOpenSearch(false)} />
+						</div>
 					) : (
 						<i
 							class="fa-solid fa-magnifying-glass"
-							style={{ marginRight: "30px" }}></i>
+							style={{ marginRight: "30px" }}
+						/>
 					)}
 
 					{width >= 900 ? (
