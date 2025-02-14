@@ -7,13 +7,17 @@ import {
 } from "../../store/cart/cart.selector";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 import PaymentForm from "../../components/payment-form/payment-form.component";
+import useWindowWidth from "../../hooks/window-hook";
 
 const Checkout = () => {
 	const cartItems = useSelector(selectCartItems);
 	const cartTotal = useSelector(selectCartTotal);
+	const width = useWindowWidth();
 
 	return (
-		<div className="checkout-container">
+		<div
+			className="checkout-container"
+			style={{ width: `${width >= 850 ? "55%" : "100%"}` }}>
 			<div className="checkout-header">
 				<div className="checkout-header-block">
 					<span>Product</span>
