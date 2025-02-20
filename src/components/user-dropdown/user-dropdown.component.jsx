@@ -20,7 +20,7 @@ const UserDropdown = () => {
 	};
 
 	const handleSignOut = async () => {
-		await fetch("http://localhost:4000/token", {
+		await fetch("https://e-store-api-5r16.onrender.com/token", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
