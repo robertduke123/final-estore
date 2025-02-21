@@ -27,7 +27,7 @@ const NavSlide = () => {
 	};
 
 	const handleSignOut = async () => {
-		await fetch("https://e-store-api-5r16.onrender.com/token", {
+		await fetch("https://e-store-api-z8jl.onrender.com/token", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({

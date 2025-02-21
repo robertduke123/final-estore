@@ -29,7 +29,7 @@ const UserForm = ({ handleEdit }) => {
 
 	const handleSetChanges = async (e) => {
 		e.preventDefault();
-		await fetch("https://e-store-api-5r16.onrender.com/edit", {
+		await fetch("https://e-store-api-z8jl.onrender.com/edit", {
 			method: "POST",
 			headers: { "Content-Type": "application/Json" },
 			body: JSON.stringify({

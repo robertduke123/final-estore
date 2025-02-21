@@ -24,7 +24,7 @@ const App = () => {
 		dispatch(setItemList(SHOP_DATA));
 		if (localStorage.getItem("refreshToken")) {
 			const refresh = localStorage.getItem("refreshToken");
-			fetch("https://e-store-api-5r16.onrender.com/token", {
+			fetch("https://e-store-api-z8jl.onrender.com/token", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
@@ -38,7 +38,7 @@ const App = () => {
 				})
 				.then((data) => {
 					if (data?.length > 15) {
-						fetch("https://e-store-api-5r16.onrender.com/post", {
+						fetch("https://e-store-api-z8jl.onrender.com/post", {
 							headers: {
 								Authorization: `Bearer ${data}`,
 								"Content-Type": "application/json",

@@ -31,7 +31,7 @@ const PasswordForm = ({ handleEdit }) => {
 			return dispatch(setMessage("New password must be different"));
 		}
 		if (newPassword === newPasswordConfirm) {
-			await fetch("https://e-store-api-5r16.onrender.com/pass", {
+			await fetch("https://e-store-api-z8jl.onrender.com/pass", {
 				method: "POST",
 				headers: { "Content-Type": "application/Json" },
 				body: JSON.stringify({

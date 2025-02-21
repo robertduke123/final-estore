@@ -29,7 +29,7 @@ const SignUpForm = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === confirmPassword) {
-			await fetch("https://e-store-api-5r16.onrender.com/register", {
+			await fetch("https://e-store-api-z8jl.onrender.com/register", {
 				method: "POST",
 				headers: { "Content-Type": "application/Json" },
 				body: JSON.stringify({

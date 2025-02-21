@@ -39,7 +39,7 @@ const PaymentForm = () => {
 		setIsProcessingPayment(true);
 
 		const response = await fetch(
-			"https://e-store-api-5r16.onrender.com/create-payment-intent",
+			"https://e-store-api-z8jl.onrender.com/create-payment-intent",
 			{
 				method: "POST",
 				headers: {
