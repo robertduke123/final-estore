@@ -42,10 +42,26 @@
 		justify-content: space-between;
 		font-size: 18px;
 
+		.underline {
+			margin-top: -15px;
+			width: 0;
+			height: 1px;
+			background-color: black;
+			transition: 0.4s ease-in-out;
+		}
+
 		h2 {
 			font-weight: 500;
 			width: 90%;
 			margin-bottom: 15px;
+
+			&:hover {
+				color: rgb(46, 46, 46);
+			}
+
+			&:hover + .underline {
+				width: 100%;
+			}
 		}
 
 		p {

@@ -17,11 +17,15 @@ const ProductCard = ({ product }) => {
 		<div className="product-container">
 			<img src={imageUrl} alt={`${name}`} />
 			<div className="product-footer">
-				<h2
-					style={{ fontSize: "20px", cursor: "pointer" }}
-					onClick={() => navigate(`/shop/product/${id}`)}>
-					{name}
-				</h2>
+				<div>
+					<h2
+						style={{ fontSize: "20px", cursor: "pointer", width: "100%" }}
+						onClick={() => navigate(`/shop/product/${id}`)}>
+						{name}
+					</h2>
+					<div className="underline"></div>
+				</div>
+
 				<p>{price}</p>
 			</div>
 			<Button buttonType="inverted" onClick={handleAddToCart}>
