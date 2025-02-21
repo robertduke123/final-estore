@@ -84,6 +84,7 @@ const PaymentForm = () => {
 						height: "150px",
 						border: "1px solid gray",
 						borderRadius: "5px",
+						backgroundColor: "rgb(245, 245, 245)",
 						boxShadow: "2px 1px 6px lightgray",
 					}}>
 					<CardElement />
