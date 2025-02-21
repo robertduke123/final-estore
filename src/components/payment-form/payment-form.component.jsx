@@ -76,7 +76,16 @@ const PaymentForm = () => {
 	return (
 		<div className="payment-from-container">
 			<form onSubmit={paymentHandler} className="form-container">
-				<div style={{ width: "550px", height: "150px" }}>
+				<div
+					style={{
+						padding: "50px 30px",
+						margin: "10px 0",
+						width: "400px",
+						height: "150px",
+						border: "1px solid gray",
+						borderRadius: "5px",
+						boxShadow: "2px 1px 6px lightgray",
+					}}>
 					<CardElement />
 				</div>
 
