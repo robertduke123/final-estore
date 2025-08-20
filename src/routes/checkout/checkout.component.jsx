@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./checkout.styles.scss";
 import { useSelector } from "react-redux";
 import {
@@ -10,6 +10,8 @@ import PaymentForm from "../../components/payment-form/payment-form.component";
 import useWindowWidth from "../../hooks/window-hook";
 import Button from "../../components/button/button.component";
 import FormInput from "../../components/form-input/form-input.component";
+import { selectCurrentUser } from "../../store/user/user.selector";
+import CheckoutCart from "../../components/checkout-cart/checkout-cart.component";
 
 const defaultFormFields = {
 	email: "",
@@ -20,18 +22,26 @@ const defaultFormFields = {
 const Checkout = () => {
 	const cartItems = useSelector(selectCartItems);
 	const cartTotal = useSelector(selectCartTotal);
+	const currentUser = useSelector(selectCurrentUser);
 	const width = useWindowWidth();
 	const [toCheckout, setToCheckout] = useState(false);
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const { email, phone, address } = formFields;
 
-	const resetFormFields = () => {
-		setFormFields(defaultFormFields);
-	};
+	// const resetFormFields = () => {
+	// 	setFormFields(defaultFormFields);
+	// };
+
+	useEffect(() => {
+		if (currentUser) {
+			const { email, phone, address } = currentUser;
+			setFormFields({ email: email, phone: phone, address: address });
+			console.log(currentUser);
+		}
+	}, [currentUser]);
 
 	const handleChange = (e) => {
 		setFormFields({ ...formFields, [e.target.name]: e.target.value });
-		console.log(formFields);
 	};
 
 	const handleToCheckout = () => setToCheckout(!toCheckout);
@@ -64,37 +74,11 @@ const Checkout = () => {
 							name="address"
 							value={address}
 						/>
-						<Button type="submit">Sign Up</Button>
+						<PaymentForm />
 					</form>
 				</div>
 			) : (
-				<div
-					className="checkout-container"
-					style={{ width: `${width >= 850 ? "55%" : "100%"}` }}>
-					<div className="checkout-header">
-						<div className="checkout-header-block">
-							<span>Product</span>
-						</div>
-						<div className="checkout-header-block">
-							<span>Description</span>
-						</div>
-						<div className="checkout-header-block">
-							<span>Quantity</span>
-						</div>
-						<div className="checkout-header-block">
-							<span>Price</span>
-						</div>
-						<div className="checkout-header-block">
-							<span>Remove</span>
-						</div>
-					</div>
-					{cartItems.map((cartItem) => (
-						<CheckoutItem key={cartItem.id} cartItem={cartItem} />
-					))}
-					<div className="total">Total: ${cartTotal}</div>
-					{/* <PaymentForm /> */}
-					<Button onClick={handleToCheckout}>Checkout</Button>
-				</div>
+				<CheckoutCart handleToCheckout={handleToCheckout} />
 			)}
 		</div>
 	);
