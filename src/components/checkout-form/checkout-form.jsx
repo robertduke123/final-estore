@@ -9,13 +9,15 @@ const defaultFormFields = {
 	email: "",
 	phone: "",
 	address: "",
+	city: "",
+	country: "",
 };
 
 const CheckoutForm = ({ handleToCheckout }) => {
 	const currentUser = useSelector(selectCurrentUser);
 	// const [toCheckout, setToCheckout] = useState(false);
 	const [formFields, setFormFields] = useState(defaultFormFields);
-	const { email, phone, address } = formFields;
+	const { email, phone, address, city, country } = formFields;
 
 	// const resetFormFields = () => {
 	// 	setFormFields(defaultFormFields);
@@ -24,7 +26,13 @@ const CheckoutForm = ({ handleToCheckout }) => {
 	useEffect(() => {
 		if (currentUser) {
 			const { email, phone, address } = currentUser;
-			setFormFields({ email: email, phone: phone, address: address });
+			setFormFields({
+				email: email,
+				phone: phone,
+				address: address,
+				city: "",
+				country: "",
+			});
 			console.log(currentUser);
 		}
 	}, [currentUser]);
@@ -61,6 +69,20 @@ const CheckoutForm = ({ handleToCheckout }) => {
 					onChange={handleChange}
 					name="address"
 					value={address}
+				/>
+				<FormInput
+					label="City"
+					type="text"
+					onChange={handleChange}
+					name="city"
+					value={city}
+				/>
+				<FormInput
+					label="Country"
+					type="text"
+					onChange={handleChange}
+					name="country"
+					value={country}
 				/>
 			</form>
 			<PaymentForm formFields={formFields} />

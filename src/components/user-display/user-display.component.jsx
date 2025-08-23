@@ -24,6 +24,14 @@ const UserDisplay = ({ handleEdit }) => {
 				<h3>Address: </h3>
 				<span>{currentUser ? currentUser?.address : ""}</span>
 			</div>
+			<div className="user-display">
+				<h3>City: </h3>
+				<span>{currentUser ? currentUser?.city : ""}</span>
+			</div>
+			<div className="user-display">
+				<h3>Country: </h3>
+				<span>{currentUser ? currentUser?.country : ""}</span>
+			</div>
 			<div style={{ display: "flex" }}>
 				<span className="user-display-edit" onClick={() => handleEdit("form")}>
 					Edit Profile

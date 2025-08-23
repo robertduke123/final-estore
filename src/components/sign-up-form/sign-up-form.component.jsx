@@ -11,6 +11,8 @@ const defaultFormFields = {
 	email: "",
 	phone: "",
 	address: "",
+	city: "",
+	country: "",
 	password: "",
 	confirmPassword: "",
 };
@@ -19,8 +21,16 @@ const SignUpForm = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [formFields, setFormFields] = useState(defaultFormFields);
-	const { displayName, email, phone, address, password, confirmPassword } =
-		formFields;
+	const {
+		displayName,
+		email,
+		phone,
+		address,
+		city,
+		country,
+		password,
+		confirmPassword,
+	} = formFields;
 
 	const resetFormFields = () => {
 		setFormFields(defaultFormFields);
@@ -37,6 +47,8 @@ const SignUpForm = () => {
 					email: email,
 					phone: phone,
 					address: address,
+					city: city,
+					country: country,
 					password: password,
 				}),
 			})
@@ -110,6 +122,20 @@ const SignUpForm = () => {
 					onChange={handleChange}
 					name="address"
 					value={address}
+				/>
+				<FormInput
+					label="City"
+					type="text"
+					onChange={handleChange}
+					name="city"
+					value={city}
+				/>
+				<FormInput
+					label="Country"
+					type="text"
+					onChange={handleChange}
+					name="country"
+					value={country}
 				/>
 				<Button type="submit">Sign Up</Button>
 			</form>

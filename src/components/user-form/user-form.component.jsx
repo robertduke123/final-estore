@@ -19,9 +19,12 @@ const UserForm = ({ handleEdit }) => {
 		newEmail: currentUser ? currentUser.email : "",
 		phone: currentUser ? currentUser.phone : "",
 		address: currentUser ? currentUser.address : "",
+		city: currentUser ? currentUser.city : "",
+		country: currentUser ? currentUser.country : "",
 	});
 
-	const { displayName, prevEmail, newEmail, phone, address } = displayInfo;
+	const { displayName, prevEmail, newEmail, phone, address, city, country } =
+		displayInfo;
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setDisplayInfo({ ...displayInfo, [name]: value });
@@ -38,6 +41,8 @@ const UserForm = ({ handleEdit }) => {
 				newEmail: newEmail,
 				phone: phone,
 				address: address,
+				city: city,
+				country: country,
 			}),
 		})
 			.then((res) => res.json())
@@ -77,8 +82,6 @@ const UserForm = ({ handleEdit }) => {
 							name="newEmail"
 							value={newEmail}
 						/>
-					</div>
-					<div className="inputs">
 						<FormInput
 							label="Phone"
 							type="number"
@@ -86,12 +89,28 @@ const UserForm = ({ handleEdit }) => {
 							name="phone"
 							value={phone}
 						/>
+					</div>
+					<div className="inputs">
 						<FormInput
 							label="Address"
 							type="text"
 							onChange={handleChange}
 							name="address"
 							value={address}
+						/>
+						<FormInput
+							label="City"
+							type="text"
+							onChange={handleChange}
+							name="city"
+							value={city}
+						/>
+						<FormInput
+							label="Country"
+							type="text"
+							onChange={handleChange}
+							name="country"
+							value={country}
 						/>
 					</div>
 				</div>
