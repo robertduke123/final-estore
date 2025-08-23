@@ -5,13 +5,10 @@ import {
 	selectCartItems,
 	selectCartTotal,
 } from "../../store/cart/cart.selector";
-import CheckoutItem from "../../components/checkout-item/checkout-item.component";
-import PaymentForm from "../../components/payment-form/payment-form.component";
 import useWindowWidth from "../../hooks/window-hook";
-import Button from "../../components/button/button.component";
-import FormInput from "../../components/form-input/form-input.component";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import CheckoutCart from "../../components/checkout-cart/checkout-cart.component";
+import CheckoutForm from "../../components/checkout-form/checkout-form";
 
 const defaultFormFields = {
 	email: "",
@@ -50,32 +47,7 @@ const Checkout = () => {
 		<div style={{ width: "100%" }}>
 			{toCheckout ? (
 				<div className="checkout-container">
-					<form>
-						<FormInput
-							label="Email"
-							type="email"
-							required
-							onChange={handleChange}
-							name="email"
-							value={email}
-						/>
-						<FormInput
-							label="Phone"
-							type="number"
-							onChange={handleChange}
-							name="phone"
-							value={phone}
-						/>
-
-						<FormInput
-							label="Address"
-							type="text"
-							onChange={handleChange}
-							name="address"
-							value={address}
-						/>
-						<PaymentForm />
-					</form>
+					<CheckoutForm handleToCheckout={handleToCheckout} />
 				</div>
 			) : (
 				<CheckoutCart handleToCheckout={handleToCheckout} />

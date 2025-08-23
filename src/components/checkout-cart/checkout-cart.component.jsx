@@ -1,4 +1,4 @@
-import "./checkout.styles.scss";
+import "./checkout-cart.styles.scss";
 import {
 	selectCartItems,
 	selectCartTotal,
