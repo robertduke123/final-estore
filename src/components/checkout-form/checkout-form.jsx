@@ -25,13 +25,13 @@ const CheckoutForm = ({ handleToCheckout }) => {
 
 	useEffect(() => {
 		if (currentUser) {
-			const { email, phone, address } = currentUser;
+			const { email, phone, address, city, country } = currentUser;
 			setFormFields({
 				email: email,
 				phone: phone,
 				address: address,
-				city: "",
-				country: "",
+				city: city,
+				country: country,
 			});
 			console.log(currentUser);
 		}
