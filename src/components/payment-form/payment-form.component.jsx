@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import countries from "i18n-iso-countries";
 import "./payment-form.styles.scss";
 import Button from "../button/button.component";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
@@ -13,10 +14,14 @@ const PaymentForm = ({ formFields }) => {
 	const stripe = useStripe();
 	const elements = useElements();
 	const amount = useSelector(selectCartTotal);
+	const [details, setDetails] = useState({});
 	const currentUser = useSelector(selectCurrentUser);
 	const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 	// const [stripePromise, setStripePromise] = useState(null);
 	const [clientSecret, setClientSecret] = useState("");
+
+	countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
+	// console.log(countries.getAlpha2Code(currentUser.country, "en"));
 
 	// useEffect(() => {
 	// 	fetch("http://localhost:4000/create-payment-intent", {
@@ -35,6 +40,8 @@ const PaymentForm = ({ formFields }) => {
 
 	const paymentHandler = async (e) => {
 		e.preventDefault();
+		const { name, email, phone, address, city, country } = formFields;
+
 		if (!stripe || !elements) return;
 		setIsProcessingPayment(true);
 
@@ -45,7 +52,15 @@ const PaymentForm = ({ formFields }) => {
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({ amount: amount * 100 }),
+				body: JSON.stringify({
+					amount: amount * 100,
+					name,
+					email,
+					phone,
+					address,
+					city,
+					country,
+				}),
 			}
 		).then((res) => res.json());
 
@@ -74,7 +89,7 @@ const PaymentForm = ({ formFields }) => {
 	};
 
 	return (
-		<div className="payment-from-container">
+		<div className="payment-form-container">
 			<form onSubmit={paymentHandler} className="form-container">
 				<div
 					style={{

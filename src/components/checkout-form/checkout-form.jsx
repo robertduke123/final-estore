@@ -25,8 +25,9 @@ const CheckoutForm = ({ handleToCheckout }) => {
 
 	useEffect(() => {
 		if (currentUser) {
-			const { email, phone, address, city, country } = currentUser;
+			const { name, email, phone, address, city, country } = currentUser;
 			setFormFields({
+				name: name,
 				email: email,
 				phone: phone,
 				address: address,
