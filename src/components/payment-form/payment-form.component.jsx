@@ -9,8 +9,9 @@ import {
 	selectCartTotal,
 } from "../../store/cart/cart.selector";
 import { selectCurrentUser } from "../../store/user/user.selector";
+import Loading from "../loading/Loading.component";
 
-const PaymentForm = ({ formFields }) => {
+const PaymentForm = ({ formFields, handleToConfirmation }) => {
 	const stripe = useStripe();
 	const elements = useElements();
 	const amount = useSelector(selectCartTotal);
@@ -40,6 +41,7 @@ const PaymentForm = ({ formFields }) => {
 
 	const paymentHandler = async (e) => {
 		e.preventDefault();
+		handleToConfirmation();
 		const { name, email, phone, address, city, country } = formFields;
 
 		if (!stripe || !elements) return;
@@ -90,6 +92,7 @@ const PaymentForm = ({ formFields }) => {
 
 	return (
 		<div className="payment-form-container">
+			{isProcessingPayment && <Loading />}
 			<form onSubmit={paymentHandler} className="form-container">
 				<div
 					style={{
