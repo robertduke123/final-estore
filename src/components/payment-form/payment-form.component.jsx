@@ -66,6 +66,8 @@ const PaymentForm = ({ formFields, handleToConfirmation }) => {
 			}
 		).then((res) => res.json());
 
+		console.log("test");
+
 		const {
 			paymentIntent: { client_secret },
 		} = response;
