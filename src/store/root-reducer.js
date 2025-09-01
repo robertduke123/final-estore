@@ -4,6 +4,7 @@ import { cartReducer } from "./cart/cart.reducer";
 import { userReducer } from "./user/user.reducer";
 import { messageReducer } from "./message/message.reducer";
 import { slideReducer } from "./slide/slide.reducer";
+import { checkoutReducer } from "./checkout/checkout.reducer";
 
 export const rootReducer = combineReducers({
 	itemList: itemListReducer,
@@ -11,4 +12,5 @@ export const rootReducer = combineReducers({
 	user: userReducer,
 	message: messageReducer,
 	slide: slideReducer,
+	checkout: checkoutReducer,
 });

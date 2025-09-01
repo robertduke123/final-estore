@@ -3,23 +3,24 @@ import countries from "i18n-iso-countries";
 import "./payment-form.styles.scss";
 import Button from "../button/button.component";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
 	selectCartItems,
 	selectCartTotal,
 } from "../../store/cart/cart.selector";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import Loading from "../loading/Loading.component";
+import { setConfirmation } from "../../store/checkout/checkout.reducer";
 
-const PaymentForm = ({ formFields, handleToConfirmation }) => {
+const PaymentForm = ({ formFields }) => {
 	const stripe = useStripe();
 	const elements = useElements();
 	const amount = useSelector(selectCartTotal);
-	const [details, setDetails] = useState({});
 	const currentUser = useSelector(selectCurrentUser);
 	const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 	// const [stripePromise, setStripePromise] = useState(null);
 	const [clientSecret, setClientSecret] = useState("");
+	const dispatch = useDispatch();
 
 	countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
 	// console.log(countries.getAlpha2Code(currentUser.country, "en"));
@@ -41,7 +42,6 @@ const PaymentForm = ({ formFields, handleToConfirmation }) => {
 
 	const paymentHandler = async (e) => {
 		e.preventDefault();
-		handleToConfirmation();
 		const { name, email, phone, address, city, country } = formFields;
 
 		if (!stripe || !elements) return;
@@ -88,6 +88,7 @@ const PaymentForm = ({ formFields, handleToConfirmation }) => {
 		} else {
 			if (paymentResult.paymentIntent.status === "succeeded") {
 				console.log(paymentResult);
+				dispatch(setConfirmation(true));
 			}
 		}
 	};

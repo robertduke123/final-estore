@@ -13,7 +13,7 @@ const defaultFormFields = {
 	country: "",
 };
 
-const CheckoutForm = ({ handleToCheckout, handleToConfirmation }) => {
+const CheckoutForm = ({ handleToCheckout }) => {
 	const currentUser = useSelector(selectCurrentUser);
 	// const [toCheckout, setToCheckout] = useState(false);
 	const [formFields, setFormFields] = useState(defaultFormFields);
@@ -86,10 +86,7 @@ const CheckoutForm = ({ handleToCheckout, handleToConfirmation }) => {
 					value={country}
 				/>
 			</form>
-			<PaymentForm
-				formFields={formFields}
-				handleToConfirmation={handleToConfirmation}
-			/>
+			<PaymentForm formFields={formFields} />
 		</div>
 	);
 };
