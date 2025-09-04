@@ -17,6 +17,7 @@ const PaymentForm = ({ formFields }) => {
 	const elements = useElements();
 	const amount = useSelector(selectCartTotal);
 	const currentUser = useSelector(selectCurrentUser);
+	const cart = [...useSelector(selectCartItems)];
 	const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 	// const [stripePromise, setStripePromise] = useState(null);
 	const [clientSecret, setClientSecret] = useState("");
@@ -39,6 +40,7 @@ const PaymentForm = ({ formFields }) => {
 	// 			console.log(data);
 	// 		});
 	// }, [, amount]);
+	const orderIds = cart.map((item) => item.id);
 
 	const paymentHandler = async (e) => {
 		e.preventDefault();
@@ -66,11 +68,22 @@ const PaymentForm = ({ formFields }) => {
 			}
 		).then((res) => res.json());
 
-		console.log("test");
-
 		const {
 			paymentIntent: { client_secret },
 		} = response;
+
+		await fetch("https://e-store-api-z8jl.onrender.com/order", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				userId: currentUser.id,
+				orderIds: orderIds,
+			}),
+		})
+			.then((res) => res.json())
+			.then(console.log);
 
 		const paymentResult = await stripe.confirmCardPayment(client_secret, {
 			payment_method: {
