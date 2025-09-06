@@ -55,9 +55,9 @@ const NavSlide = () => {
 				<i
 					class="fa-solid fa-x"
 					onClick={handleSlide}
-					style={{ margin: "20px 20px 0" }}
+					style={{ margin: "20px 20px 0", position: "relative", zIndex: "18" }}
 				/>
-
+				<div className="top-border" />
 				<ul>
 					<li className="top-link" onClick={() => handleNav("/shop")}>
 						SHOP
@@ -82,11 +82,14 @@ const NavSlide = () => {
 								style={
 									userOpen
 										? { transform: "translateY(0)" }
-										: { transform: "translateY(-66.5%)" }
+										: { transform: "translateY(-75%)" }
 								}
 								className="user-links-container">
 								<li className="user-links" onClick={() => handleNav("user")}>
 									USER INFO
+								</li>
+								<li className="user-links" onClick={() => handleNav("orders")}>
+									ORDERS
 								</li>
 								<li className="user-links" onClick={handleSignOut}>
 									SIGN OUT

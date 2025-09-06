@@ -15,6 +15,7 @@ import Message from "./components/message/message.component";
 import { selectMessageDisplay } from "./store/message/message.selector";
 import { setItemList } from "./store/itemList/item-list.reducer";
 import { setCart } from "./store/cart/cart.reducer";
+import Orders from "./routes/orders/orders.components";
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -69,10 +70,8 @@ const App = () => {
 						<Route path="shop/*" element={<Shop />} />
 						<Route path="checkout" element={<Checkout />} />
 						<Route path="auth" element={<Authentication />} />
-						<Route
-							path="user"
-							element={currentUser ? <UserInfo /> : <Authentication />}
-						/>
+						<Route path="orders" element={<Orders />} />
+						<Route path="user" element={<UserInfo />} />
 					</Route>
 				</Route>
 			</Routes>

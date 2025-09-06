@@ -96,8 +96,9 @@ const PaymentForm = ({ formFields }) => {
 				dateOfPurchase: dateOfPurchase,
 				orderNo: orderNo,
 			}),
-		}).then((res) => res.json());
-		// .then();
+		})
+			.then((res) => res.json())
+			.then(console.log);
 
 		dispatch(setOrder(cart));
 		dispatch(setOrderDate(dateOfPurchase));

@@ -18,6 +18,11 @@ const UserDropdown = () => {
 		navigate("user");
 		dispatch(setUserDropdownIsOpen(false));
 	};
+	const handleOrdersNav = () => {
+		window.scrollTo(0, 0);
+		navigate("orders");
+		dispatch(setUserDropdownIsOpen(false));
+	};
 
 	const handleSignOut = async () => {
 		await fetch("https://e-store-api-z8jl.onrender.com/token", {
@@ -40,6 +45,9 @@ const UserDropdown = () => {
 		<div className="user-dropdown-container">
 			<div className="user-dropdown-item" onClick={handleUserNav}>
 				<span>USER INFO</span>
+			</div>
+			<div className="user-dropdown-item" onClick={handleOrdersNav}>
+				<span>ORDERS</span>
 			</div>
 			<div className="user-dropdown-item" onClick={handleSignOut}>
 				<span>SIGN OUT</span>
