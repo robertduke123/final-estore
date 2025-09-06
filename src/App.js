@@ -14,6 +14,7 @@ import { selectCurrentUser } from "./store/user/user.selector";
 import Message from "./components/message/message.component";
 import { selectMessageDisplay } from "./store/message/message.selector";
 import { setItemList } from "./store/itemList/item-list.reducer";
+import { setCart } from "./store/cart/cart.reducer";
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -24,6 +25,11 @@ const App = () => {
 		dispatch(setItemList(SHOP_DATA));
 		if (localStorage.getItem("refreshToken")) {
 			const refresh = localStorage.getItem("refreshToken");
+			const cart = JSON.parse(localStorage.getItem("cart"));
+			if (cart) {
+				dispatch(setCart(cart));
+			}
+
 			fetch("https://e-store-api-z8jl.onrender.com/token", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },

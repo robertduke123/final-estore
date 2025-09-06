@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const INITIAL_STATE_CHECKOUT = {
 	confirmation: false,
+	order: [],
 };
 
 export const checkoutSlice = createSlice({
@@ -11,9 +12,15 @@ export const checkoutSlice = createSlice({
 		setConfirmation(state, action) {
 			state.confirmation = action.payload;
 		},
+		setOrder(state, action) {
+			state.order = action.payload;
+		},
+		emptyOrder(state) {
+			state.order = [];
+		},
 	},
 });
 
-export const { setConfirmation } = checkoutSlice.actions;
+export const { setConfirmation, setOrder, emptyOrder } = checkoutSlice.actions;
 
 export const checkoutReducer = checkoutSlice.reducer;

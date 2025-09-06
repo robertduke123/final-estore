@@ -10,7 +10,11 @@ import {
 } from "../../store/cart/cart.selector";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import Loading from "../loading/Loading.component";
-import { setConfirmation } from "../../store/checkout/checkout.reducer";
+import {
+	setConfirmation,
+	setOrder,
+} from "../../store/checkout/checkout.reducer";
+import { emptyCart } from "../../store/cart/cart.reducer";
 
 const PaymentForm = ({ formFields }) => {
 	const stripe = useStripe();
@@ -40,11 +44,22 @@ const PaymentForm = ({ formFields }) => {
 	// 			console.log(data);
 	// 		});
 	// }, [, amount]);
-	const orderIds = cart.map((item) => item.id);
+	const orderIds = [];
+	const orderQuantities = [];
+	cart.map((item) => {
+		orderIds.push(item.id);
+		orderQuantities.push(item.quantity);
+	});
 
 	const paymentHandler = async (e) => {
 		e.preventDefault();
 		const { name, email, phone, address, city, country } = formFields;
+		const today = new Date();
+		const date = today.getDate();
+		const month = today.getMonth() + 1;
+		const year = today.getFullYear();
+
+		let dateOfPurchase = `Date: ${date}, Month: ${month}, Year: ${year}`;
 
 		if (!stripe || !elements) return;
 		setIsProcessingPayment(true);
@@ -64,6 +79,7 @@ const PaymentForm = ({ formFields }) => {
 					address,
 					city,
 					country,
+					dateOfPurchase,
 				}),
 			}
 		).then((res) => res.json());
@@ -80,10 +96,14 @@ const PaymentForm = ({ formFields }) => {
 			body: JSON.stringify({
 				userId: currentUser.id,
 				orderIds: orderIds,
+				orderQuantities: orderQuantities,
 			}),
 		})
 			.then((res) => res.json())
 			.then(console.log);
+
+		dispatch(setOrder(cart));
+		dispatch(emptyCart());
 
 		const paymentResult = await stripe.confirmCardPayment(client_secret, {
 			payment_method: {
