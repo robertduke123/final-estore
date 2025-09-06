@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import countries from "i18n-iso-countries";
 import "./payment-form.styles.scss";
 import Button from "../button/button.component";
@@ -13,6 +13,8 @@ import Loading from "../loading/Loading.component";
 import {
 	setConfirmation,
 	setOrder,
+	setOrderDate,
+	setOrderNo,
 } from "../../store/checkout/checkout.reducer";
 import { emptyCart } from "../../store/cart/cart.reducer";
 
@@ -23,27 +25,9 @@ const PaymentForm = ({ formFields }) => {
 	const currentUser = useSelector(selectCurrentUser);
 	const cart = [...useSelector(selectCartItems)];
 	const [isProcessingPayment, setIsProcessingPayment] = useState(false);
-	// const [stripePromise, setStripePromise] = useState(null);
-	const [clientSecret, setClientSecret] = useState("");
 	const dispatch = useDispatch();
 
 	countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
-	// console.log(countries.getAlpha2Code(currentUser.country, "en"));
-
-	// useEffect(() => {
-	// 	fetch("http://localhost:4000/create-payment-intent", {
-	// 		method: "POST",
-	// 		headers: { "Content-Type": "application/Json" },
-	// 		body: JSON.stringify({
-	// 			amount: amount,
-	// 		}),
-	// 	})
-	// 		.then((res) => res.json())
-	// 		.then((data) => {
-	// 			// setClientSecret(data.clientSecret);
-	// 			console.log(data);
-	// 		});
-	// }, [, amount]);
 	const orderIds = [];
 	const orderQuantities = [];
 	cart.map((item) => {
@@ -53,13 +37,26 @@ const PaymentForm = ({ formFields }) => {
 
 	const paymentHandler = async (e) => {
 		e.preventDefault();
+		window.scrollTo(0, 0);
 		const { name, email, phone, address, city, country } = formFields;
 		const today = new Date();
 		const date = today.getDate();
-		const month = today.getMonth() + 1;
+		const month = today.toLocaleString("default", { month: "short" });
 		const year = today.getFullYear();
+		const suffix =
+			date.toString().slice(-1).includes(1) && date !== 11
+				? "st"
+				: date.toString().slice(-1).includes(2) && date !== 12
+				? "nd"
+				: date.toString().slice(-1).includes(3) && date !== 13
+				? "rd"
+				: "th";
 
-		let dateOfPurchase = `Date: ${date}, Month: ${month}, Year: ${year}`;
+		const number = today.toISOString().slice(0, 10).replace(/-/g, "");
+		const random = Math.floor(1000 + Math.random() * 9000); // 4-digit random
+		const orderNo = `ORD-${number}-${random}`;
+
+		let dateOfPurchase = `${date + suffix} ${month} ${year}`;
 
 		if (!stripe || !elements) return;
 		setIsProcessingPayment(true);
@@ -79,7 +76,6 @@ const PaymentForm = ({ formFields }) => {
 					address,
 					city,
 					country,
-					dateOfPurchase,
 				}),
 			}
 		).then((res) => res.json());
@@ -97,19 +93,22 @@ const PaymentForm = ({ formFields }) => {
 				userId: currentUser.id,
 				orderIds: orderIds,
 				orderQuantities: orderQuantities,
+				dateOfPurchase: dateOfPurchase,
+				orderNo: orderNo,
 			}),
-		})
-			.then((res) => res.json())
-			.then(console.log);
+		}).then((res) => res.json());
+		// .then();
 
 		dispatch(setOrder(cart));
+		dispatch(setOrderDate(dateOfPurchase));
+		dispatch(setOrderNo(orderNo));
 		dispatch(emptyCart());
 
 		const paymentResult = await stripe.confirmCardPayment(client_secret, {
 			payment_method: {
 				card: elements.getElement(CardElement),
 				billing_details: {
-					name: currentUser ? currentUser.dsiplayName : "Guest",
+					name: currentUser ? currentUser.name : "Guest",
 				},
 			},
 		});

@@ -12,7 +12,10 @@ const Checkout = () => {
 	const confirmation = useSelector(selectConfirmation);
 	const dispatch = useDispatch();
 
-	const handleToCheckout = () => setToCheckout(!toCheckout);
+	const handleToCheckout = () => {
+		window.scrollTo(0, 0);
+		setToCheckout(!toCheckout);
+	};
 
 	useEffect(() => {
 		dispatch(setConfirmation(false));

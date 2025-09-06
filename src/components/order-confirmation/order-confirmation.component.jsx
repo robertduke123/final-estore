@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
-	selectCartItems,
-	selectCartTotal,
-} from "../../store/cart/cart.selector";
-import { emptyCart } from "../../store/cart/cart.reducer";
-import { selectOrder } from "../../store/checkout/checkout.selector";
+	selectOrder,
+	selectOrderDate,
+	selectOrderNo,
+} from "../../store/checkout/checkout.selector";
 import "./order-confirmation.styles.scss";
+import { useNavigate } from "react-router-dom";
 
 const OrderConfirmation = () => {
-	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const order = useSelector(selectOrder);
+	const orderDate = useSelector(selectOrderDate);
+	const orderNo = useSelector(selectOrderNo);
 	const [orderTotal, setOrderTotal] = useState(100);
 
 	useEffect(() => {
@@ -22,28 +24,17 @@ const OrderConfirmation = () => {
 		);
 	}, []);
 
-	// const order = [
-	// 	{
-	// 		name: "stuff",
-	// 		quantity: 2,
-	// 		price: 30,
-	// 	},
-	// 	{
-	// 		name: "stuff",
-	// 		quantity: 2,
-	// 		price: 20,
-	// 	},
-	// 	{
-	// 		name: "stuff",
-	// 		quantity: 2,
-	// 		price: 10,
-	// 	},
-	// ];
+	const handleReturnHome = () => navigate("/");
 
 	return (
 		<div className="order-confirmation">
+			<div className="left" onClick={handleReturnHome}>
+				&#x2190; BACK
+			</div>
 			<h1>Thank you for your order!</h1>
-			<p>Your order 01 has been placed successfully.</p>
+			<p>
+				Your order <strong>#{orderNo}</strong> has been placed successfully.
+			</p>
 
 			<div className="order-details">
 				<h2>Order Summary</h2>
@@ -51,11 +42,11 @@ const OrderConfirmation = () => {
 					{order.map((item, index) => (
 						<li key={index} className="order-items">
 							<div className="item-img">
-								<img src="" alt="" />
-								<p>6th September 2025</p>
+								<img src={item.imageUrl} alt={item.name} />
+								<p>{orderDate}</p>
 							</div>
 							<div className="item-details">
-								<p>{`${item.quantity} ${item.name}`}</p>
+								<p>{`${item.quantity} x ${item.name}`}</p>
 								<p>${item.price}</p>
 							</div>
 						</li>

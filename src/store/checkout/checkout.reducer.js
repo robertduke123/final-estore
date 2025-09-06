@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const INITIAL_STATE_CHECKOUT = {
 	confirmation: false,
 	order: [],
+	orderDate: "",
+	orderNo: "",
 };
 
 export const checkoutSlice = createSlice({
@@ -18,9 +20,21 @@ export const checkoutSlice = createSlice({
 		emptyOrder(state) {
 			state.order = [];
 		},
+		setOrderDate(state, action) {
+			state.orderDate = action.payload;
+		},
+		setOrderNo(state, action) {
+			state.orderNo = action.payload;
+		},
 	},
 });
 
-export const { setConfirmation, setOrder, emptyOrder } = checkoutSlice.actions;
+export const {
+	setConfirmation,
+	setOrder,
+	emptyOrder,
+	setOrderDate,
+	setOrderNo,
+} = checkoutSlice.actions;
 
 export const checkoutReducer = checkoutSlice.reducer;
