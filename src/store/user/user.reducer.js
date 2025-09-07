@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const INITIAL_STATE = {
 	currentUser: null,
 	userDropdownOpen: false,
+	pastOrders: [],
 };
 
 export const userSlice = createSlice({
@@ -15,9 +16,13 @@ export const userSlice = createSlice({
 		setUserDropdownIsOpen(state, action) {
 			state.userDropdownOpen = action.payload;
 		},
+		setPastOrders(state, action) {
+			state.pastOrders = action.payload;
+		},
 	},
 });
 
-export const { setCurrentUser, setUserDropdownIsOpen } = userSlice.actions;
+export const { setCurrentUser, setUserDropdownIsOpen, setPastOrders } =
+	userSlice.actions;
 
 export const userReducer = userSlice.reducer;

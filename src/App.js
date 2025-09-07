@@ -8,7 +8,7 @@ import Checkout from "./routes/checkout/checkout.component";
 import Authentication from "./routes/authentication/authentication.component";
 import SHOP_DATA from "./shop-data";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentUser } from "./store/user/user.reducer";
+import { setCurrentUser, setPastOrders } from "./store/user/user.reducer";
 import UserInfo from "./routes/user-info/user-info.component";
 import { selectCurrentUser } from "./store/user/user.selector";
 import Message from "./components/message/message.component";
@@ -16,10 +16,12 @@ import { selectMessageDisplay } from "./store/message/message.selector";
 import { setItemList } from "./store/itemList/item-list.reducer";
 import { setCart } from "./store/cart/cart.reducer";
 import Orders from "./routes/orders/orders.components";
+import { selectOrder } from "./store/checkout/checkout.selector";
 
 const App = () => {
 	const dispatch = useDispatch();
 	const currentUser = useSelector(selectCurrentUser);
+	const order = useSelector(selectOrder);
 	const messageDisplay = useSelector(selectMessageDisplay);
 
 	useEffect(() => {
@@ -59,6 +61,20 @@ const App = () => {
 				});
 		}
 	}, []);
+
+	useEffect(() => {
+		if (currentUser) {
+			fetch("https://e-store-api-z8jl.onrender.com/past-orders", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					id: currentUser.id,
+				}),
+			})
+				.then((response) => response.json())
+				.then((data) => dispatch(setPastOrders(data)));
+		}
+	}, [currentUser, order]);
 
 	return (
 		<Fragment>
