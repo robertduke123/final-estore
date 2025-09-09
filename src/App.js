@@ -17,11 +17,13 @@ import { setItemList } from "./store/itemList/item-list.reducer";
 import { setCart } from "./store/cart/cart.reducer";
 import Orders from "./routes/orders/orders.components";
 import { selectOrder } from "./store/checkout/checkout.selector";
+import { selectItemList } from "./store/itemList/item-list.selector";
 
 const App = () => {
 	const dispatch = useDispatch();
 	const currentUser = useSelector(selectCurrentUser);
 	const order = useSelector(selectOrder);
+	const itemList = useSelector(selectItemList);
 	const messageDisplay = useSelector(selectMessageDisplay);
 
 	useEffect(() => {
@@ -72,7 +74,12 @@ const App = () => {
 				}),
 			})
 				.then((response) => response.json())
-				.then((data) => dispatch(setPastOrders(data)));
+				.then((data) => {
+					// const detailedPastOrders = [];
+					// detailedPastOrders.push(data.forEach((order) => order.order_ids.forEach((id) => itemList.forEach((item) => item.id === id))))
+
+					dispatch(setPastOrders(data));
+				});
 		}
 	}, [currentUser, order]);
 

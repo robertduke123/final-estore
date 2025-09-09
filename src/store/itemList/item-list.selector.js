@@ -17,3 +17,7 @@ export const selectItemListMap = createSelector(
 			return acc;
 		}, {})
 );
+
+export const selectItemListArray = createSelector([selectItemListMap], (obj) =>
+	Object.values(obj).flat()
+);
