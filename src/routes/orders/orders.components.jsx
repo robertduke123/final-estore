@@ -30,9 +30,12 @@ const Orders = () => {
 					});
 					return (
 						<li key={"order " + indx}>
-							<h3>{order.order_no}</h3>
-							<p>{order.date_of_purchase}</p>
-							<ul>{}</ul>
+							<div>
+								<h3>{order.order_no}</h3>
+								<p>{order.date_of_purchase}</p>
+							</div>
+							<div className="down">&#8964;</div>
+							{/* <ul>{}</ul> */}
 						</li>
 					);
 				})}
