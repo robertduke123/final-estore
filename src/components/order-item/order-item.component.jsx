@@ -1,23 +1,28 @@
 import React, { useState } from "react";
 import "./order-item.styles.scss";
+import { useNavigate } from "react-router-dom";
 
-const OrderItem = ({ order, orderDetails }) => {
-	const [dropdown, setDropdown] = useState(false);
+const OrderItem = ({ order, orderDetails, setRef, handleDropdown, indx }) => {
+	// const [dropdown, setDropdown] = useState(false);
 
-	const handleDropDown = () => setDropdown(!dropdown);
+	// const handleDropDown = () => setDropdown(!dropdown);
+	const navigate = useNavigate();
 
 	return (
 		<div
 			className="order"
 			style={{
-				height: `${dropdown ? `${65 + orderDetails.length * 90}px` : "80px"}`,
+				height: `${
+					order.dropdown ? `${90 + orderDetails.length * 80}px` : "70px"
+				}`,
 				transition: "0.5s ease-in-out",
 			}}>
 			<li
+				ref={setRef(order.id)}
 				className="order-item-container"
 				style={{
 					backgroundColor: `${
-						dropdown ? "rgb(176, 176, 176)" : "rgb(238, 238, 238)"
+						order.dropdown ? "rgb(176, 176, 176)" : "rgb(238, 238, 238)"
 					}`,
 					transition: "0.5s ease-in-out",
 				}}>
@@ -27,9 +32,9 @@ const OrderItem = ({ order, orderDetails }) => {
 				</div>
 				<div
 					className="down"
-					onClick={handleDropDown}
+					onClick={() => handleDropdown(indx)}
 					style={{
-						transform: `${dropdown ? "rotate(180deg)" : "rotate(0)"}`,
+						transform: `${order.dropdown ? "rotate(180deg)" : "rotate(0)"}`,
 						transition: "0.5s ease-in-out",
 					}}>
 					&#8964;
@@ -38,7 +43,9 @@ const OrderItem = ({ order, orderDetails }) => {
 			<div
 				className="order-details-container"
 				style={{
-					height: `${dropdown ? `${45 + orderDetails.length * 90}px` : "50px"}`,
+					height: `${
+						order.dropdown ? `${80 + orderDetails.length * 80}px` : "50px"
+					}`,
 					transition: "0.5s ease-in-out",
 				}}>
 				<ul>
@@ -47,7 +54,7 @@ const OrderItem = ({ order, orderDetails }) => {
 							className="order-detail-item"
 							key={"detail " + idnx}
 							style={{
-								marginTop: `${idnx === 0 ? "50px" : "10px"}`,
+								marginTop: `${idnx === 0 ? "60px" : "10px"}`,
 							}}>
 							<img src={item.imageUrl} alt={item.name} />
 
@@ -55,7 +62,8 @@ const OrderItem = ({ order, orderDetails }) => {
 								className="item-details"
 								style={{
 									transition: "0.5s ease-in-out",
-								}}>
+								}}
+								onClick={() => navigate(`/shop/product/${item.id}`)}>
 								<p>{`${order.order_quantities[idnx]} x ${item.name}`}</p>
 								<p>${item.price}</p>
 							</div>

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Home from "./routes/home/home.component";
 import Navigation from "./routes/navigation/navigation.component";
 import Shop from "./routes/shop/shop.component";
@@ -25,9 +25,16 @@ const App = () => {
 	const order = useSelector(selectOrder);
 	const itemList = useSelector(selectItemList);
 	const messageDisplay = useSelector(selectMessageDisplay);
+	const param = useLocation();
+	const navigate = useNavigate();
+	console.log(param.pathname);
 
 	useEffect(() => {
 		dispatch(setItemList(SHOP_DATA));
+		const cart = JSON.parse(localStorage.getItem("cart"));
+		if (cart) {
+			dispatch(setCart(cart));
+		}
 		if (localStorage.getItem("refreshToken")) {
 			const refresh = localStorage.getItem("refreshToken");
 			const cart = JSON.parse(localStorage.getItem("cart"));
@@ -61,6 +68,10 @@ const App = () => {
 							});
 					}
 				});
+		} else {
+			if (param.pathname === "/user" || param.pathname === "/orders") {
+				navigate("/");
+			}
 		}
 	}, []);
 
@@ -77,8 +88,9 @@ const App = () => {
 				.then((data) => {
 					// const detailedPastOrders = [];
 					// detailedPastOrders.push(data.forEach((order) => order.order_ids.forEach((id) => itemList.forEach((item) => item.id === id))))
-
-					dispatch(setPastOrders(data));
+					const pastOrders = data;
+					pastOrders.forEach((item) => (item.dropdown = false));
+					dispatch(setPastOrders(pastOrders));
 				});
 		}
 	}, [currentUser, order]);

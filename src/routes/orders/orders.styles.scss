@@ -12,4 +12,22 @@
 		align-items: center;
 		list-style: none;
 	}
+
+	.page-numbers-container {
+		width: 400px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		.numbers {
+			padding-top: 10px;
+			display: flex;
+			align-items: center;
+		}
+		p {
+			cursor: pointer;
+			user-select: none;
+			margin: 0 5px;
+		}
+	}
 }
