@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import "./order-item.styles.scss";
 import { useNavigate } from "react-router-dom";
 
 const OrderItem = ({ order, orderDetails, setRef, handleDropdown, indx }) => {
-	// const [dropdown, setDropdown] = useState(false);
-
-	// const handleDropDown = () => setDropdown(!dropdown);
 	const navigate = useNavigate();
 
 	return (

@@ -17,13 +17,11 @@ import { setItemList } from "./store/itemList/item-list.reducer";
 import { setCart } from "./store/cart/cart.reducer";
 import Orders from "./routes/orders/orders.components";
 import { selectOrder } from "./store/checkout/checkout.selector";
-import { selectItemList } from "./store/itemList/item-list.selector";
 
 const App = () => {
 	const dispatch = useDispatch();
 	const currentUser = useSelector(selectCurrentUser);
 	const order = useSelector(selectOrder);
-	const itemList = useSelector(selectItemList);
 	const messageDisplay = useSelector(selectMessageDisplay);
 	const param = useLocation();
 	const navigate = useNavigate();
@@ -51,7 +49,14 @@ const App = () => {
 			})
 				.then((response) => {
 					if (response.status !== 403) {
-						return response.json();
+						response.json();
+
+						return;
+					} else {
+						if (param.pathname === "/user" || param.pathname === "/orders") {
+							navigate("/");
+						}
+						localStorage.removeItem("refreshToken");
 					}
 				})
 				.then((data) => {
@@ -86,8 +91,6 @@ const App = () => {
 			})
 				.then((response) => response.json())
 				.then((data) => {
-					// const detailedPastOrders = [];
-					// detailedPastOrders.push(data.forEach((order) => order.order_ids.forEach((id) => itemList.forEach((item) => item.id === id))))
 					const pastOrders = data;
 					pastOrders.forEach((item) => (item.dropdown = false));
 					dispatch(setPastOrders(pastOrders));
