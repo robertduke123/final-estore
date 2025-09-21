@@ -7,7 +7,7 @@ import OrderItem from "../../components/order-item/order-item.component";
 
 const Orders = () => {
 	const orders = useSelector(selectPastOrders);
-	const [pastOrders, setPastOrders] = useState();
+	const [pastOrders, setPastOrders] = useState([]);
 	const itemListArray = useSelector(selectItemListArray);
 	const itemRefs = useRef({});
 	const [number, setNumbers] = useState([]);
@@ -59,26 +59,26 @@ const Orders = () => {
 	};
 
 	const handleNextPage = () => {
-		if (selectedNumber !== number.length) {
+		if (selectedNumber !== number?.length) {
 			setSelectedNumber(selectedNumber + 1);
-			// window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 		}
 	};
 	const handlePrevPage = () => {
 		if (selectedNumber !== 1) {
 			setSelectedNumber(selectedNumber - 1);
-			// window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 		}
 	};
 	const handleSelectPage = (num) => {
 		setSelectedNumber(num);
-		// window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 	};
 
 	return (
 		<div className="orders-container">
 			<h1>Orders</h1>
 			<ul className="order-list-container">
+				{pastOrders?.length === 0 && (
+					<h1 className="no-orders">You Have No Orders</h1>
+				)}
 				{pastOrders?.map((order, indx) => {
 					const orderDetails = [];
 					order?.order_ids.forEach((id) => {
