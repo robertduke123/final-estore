@@ -25,7 +25,6 @@ const App = () => {
 	const messageDisplay = useSelector(selectMessageDisplay);
 	const param = useLocation();
 	const navigate = useNavigate();
-	console.log(param.pathname);
 
 	useEffect(() => {
 		dispatch(setItemList(SHOP_DATA));
@@ -48,10 +47,10 @@ const App = () => {
 				}),
 			})
 				.then((response) => {
-					if (response.status !== 403) {
-						response.json();
+					console.log(response);
 
-						return;
+					if (response.status !== 403) {
+						return response.json();
 					} else {
 						if (param.pathname === "/user" || param.pathname === "/orders") {
 							navigate("/");
