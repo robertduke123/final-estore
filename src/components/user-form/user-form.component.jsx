@@ -33,22 +33,19 @@ const UserForm = ({ handleEdit }) => {
 	const handleSetChanges = async (e) => {
 		e.preventDefault();
 		const currentId = currentUser.id;
-		await fetch(
-			"https://e-store-api-z8jl.onrender.com/edit"
-			{
-				method: "POST",
-				headers: { "Content-Type": "application/Json" },
-				body: JSON.stringify({
-					name: displayName,
-					prevEmail: prevEmail,
-					newEmail: newEmail,
-					phone: phone,
-					address: address,
-					city: city,
-					country: country,
-				}),
-			},
-		)
+		await fetch("https://e-store-api-z8jl.onrender.com/edit", {
+			method: "POST",
+			headers: { "Content-Type": "application/Json" },
+			body: JSON.stringify({
+				name: displayName,
+				prevEmail: prevEmail,
+				newEmail: newEmail,
+				phone: phone,
+				address: address,
+				city: city,
+				country: country,
+			}),
+		})
 			.then((res) => res.json())
 			.then((data) => {
 				dispatch(
