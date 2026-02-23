@@ -34,19 +34,10 @@ const SignInForm = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				localStorage.setItem("refreshToken", data.refreshToken);
-				fetch("https://e-store-api-z8jl.onrender.com/post", {
-					headers: {
-						Authorization: `Bearer ${data.accessToken}`,
-						"Content-Type": "application/json",
-					},
-				})
-					.then((res) => res.json())
-					.then((data) => {
-						dispatch(setCurrentUser(data[0]));
-						navigate("/");
-						resetFromFields();
-					});
+				localStorage.setItem("refreshToken", data.refresh);
+				dispatch(setCurrentUser(data.userData));
+				navigate("/");
+				resetFromFields();
 			});
 	};
 

@@ -59,18 +59,7 @@ const App = () => {
 					}
 				})
 				.then((data) => {
-					if (data?.length > 15) {
-						fetch("https://e-store-api-z8jl.onrender.com/post", {
-							headers: {
-								Authorization: `Bearer ${data}`,
-								"Content-Type": "application/json",
-							},
-						})
-							.then((response) => response.json())
-							.then((data) => {
-								dispatch(setCurrentUser(data[0]));
-							});
-					}
+					dispatch(setCurrentUser(data));
 				});
 		} else {
 			if (param.pathname === "/user" || param.pathname === "/orders") {
