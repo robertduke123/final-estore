@@ -34,8 +34,7 @@ const UserForm = ({ handleEdit }) => {
 		e.preventDefault();
 		const currentId = currentUser.id;
 		await fetch(
-			// "https://e-store-api-z8jl.onrender.com/edit"
-			"http://localhost:4000/edit",
+			"https://e-store-api-z8jl.onrender.com/edit"
 			{
 				method: "POST",
 				headers: { "Content-Type": "application/Json" },
