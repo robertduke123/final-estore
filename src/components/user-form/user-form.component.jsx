@@ -54,6 +54,7 @@ const UserForm = ({ handleEdit }) => {
 						...data,
 					}),
 				);
+				window.scrollTo(0, 0);
 				dispatch(setMessageDisplay(true));
 				dispatch(setMessage("User info changed"));
 				handleEdit("display");
