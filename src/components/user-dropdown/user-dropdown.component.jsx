@@ -25,7 +25,7 @@ const UserDropdown = () => {
 	};
 
 	const handleSignOut = async () => {
-		await fetch("https://e-store-api-z8jl.onrender.com/token", {
+		await fetch("https://e-store-api-z8jl.onrender.com/logout", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
